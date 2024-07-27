@@ -1,17 +1,13 @@
 # BUBATZ-TOKEN-QUELL-CODE---S
-.github/   └── workflows/       └── build-and-run-bot.yml/telegram_bot.c 
-echo "# BUBATZ-TOKEN-QUELL-CODE---S" >> README.md 
-git init 
-git add README.md 
-git commit -m "erstes Commit" 
-git branch -M main 
-git remote add origin https://github.com/RFOF-NETWORK/BUBATZ-TOKEN-QUELL-CODE---S.git
- git push -u origin main
- 👋 Welcome to the BUBATZ TOKEN BOT.
-git add .
-git commit -m "Add GitHub Actions workflow and telegram_bot.c"
+.github/└── workflows/└── build-and-run-bot.yml/telegram_bot.c 
+git add . 
+git commit -m "Add GitHub Actions workflow and telegram_bot.c" 
+git push origin main
+git add . 
+git commit -m "Add GitHub Actions workflow and telegram_bot.c" 
 git push origin main
 
+ 👋 Welcome to the BUBATZ TOKEN BOT.
 "@RFOF_BOT API Token 6774549752:AAFx5D-reu3Pu- qkmKLh2aNxumv4faZtRN0"
 (You can change your language:
 "🇬🇧English . . . . . . /langen
