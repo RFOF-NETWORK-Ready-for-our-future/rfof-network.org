@@ -13,7 +13,7 @@ git add .
 git commit -m "Add GitHub Actions workflow and telegram_bot.c" 
 git push origin main
 
- 👋 Welcome to the BUBATZ TOKEN BOT.
+ 👋 Welcome to the TOKEN BOT.
 "@RFOF_BOT API Token 6774549752:AAFx5D-reu3Pu- qkmKLh2aNxumv4faZtRN0"
 (You can change your language:
 "🇬🇧English . . . . . . /langen
@@ -39,7 +39,7 @@ Deutsch    [ 37%]
 
 ▍To participate this translation)
 ▍@SatoOwnerOfficial
-💎BUBATZ MEME COIN (BBC)  🔗 TON   🏛️ 0,2Lp
+💎MEME COIN (BBC)  🔗 TON   🏛️ 0,2Lp
 100k $BBC AIRDROP✈️
 
 "👨‍👩‍👧‍👦 2 holders: 100% | 0%
@@ -64,7 +64,7 @@ Balance: 0.200 TON/$1.52
 
 📈 chart    🔍 scanner
 👆👆👆👆👆👆👆👆📊
-Chart undd scanner comment on the first of August two thousand and twenty-four platform Ston.fi & DeDust.io = 2 | Look forward to new trends and trading opportunities with the $BUBATZ TOKEN (Staking, Mining, trading and swapping) 🚀📊🌏🏙️🪩👑✨
+Chart undd scanner comment on the first of August two thousand and twenty-four platform Ston.fi & DeDust.io = 2 | Look forward to new trends and trading opportunities with the $TOKEN (Staking, Mining, trading and swapping) 🚀📊🌏🏙️🪩👑✨
 Mintable: ❌ Yes (Owner)echo "# - https://github.com/RFOF-NETWORK/BUBATZ-TOKEN-QUELL-CODE---S.git-" >> README.md
 git init
 git add README.md
@@ -173,15 +173,15 @@ void send_message(const char *message) {
 void process_command(const char *command) {
     printf("Processing command: %s\n", command);
     if (strcmp(command, "/start") == 0) {
-        send_message("Willkommen beim Bubatz Token Help Bot! Hier sind die verfügbaren Befehle: /info, /price, /buy, /sell, /transactions, /security, /support, /news, /community, /empty");
+        send_message("Willkommen beim Token Help Bot! Hier sind die verfügbaren Befehle: /info, /price, /buy, /sell, /transactions, /security, /support, /news, /community, /empty");
     } else if (strcmp(command, "/info") == 0) {
-        send_message("Hi, I'm BUBATZ. Welcome to the BUBATZ TOKEN BOT. I'd like to give you an explanation. The $BBC Token is an innovative meme token based on the TON Blockchain (Telegram Open Network). Our goal is to provide financial support and political advocacy for the cannabis culture in a straightforward manner. To ensure simplicity and direct use, we aim to avoid complex apps or websites.");
+        send_message("Hi, I'm BUBATZ. Welcome to the TOKEN BOT. I'd like to give you an explanation. The $BBC Token is an innovative meme token based on the TON Blockchain (Telegram Open Network). Our goal is to provide financial support and political advocacy for the cannabis culture in a straightforward manner. To ensure simplicity and direct use, we aim to avoid complex apps or websites.");
     } else if (strcmp(command, "/price") == 0) {
-        send_message("Der aktuelle Preis des Bubatz Tokens beträgt 0,000000");
+        send_message("Der aktuelle Preis des Tokens beträgt 0,000000");
     } else if (strcmp(command, "/buy") == 0) {
-        send_message("Anleitungen zum Kauf von Bubatz Tokens: At the date 01.01.2024 we launch our token with SHIBA INU on TON INU🧿📘");
+        send_message("Anleitungen zum Kauf von Tokens: At the date 01.01.2024 we launch our token with SHIBA INU on TON INU🧿📘");
     } else if (strcmp(command, "/sell") == 0) {
-        send_message("Anleitungen zum Verkauf von Bubatz Tokens: At the date 01.08. You can hold my BBC Token on major websites: Ston.fi, DeDust.io, and Gecko🚀🚀🚀🚀🚀🚀🚀🚀🚀");
+        send_message("Anleitungen zum Verkauf von Tokens: At the date 01.08. You can hold my BBC Token on major websites: Ston.fi, DeDust.io, and Gecko🚀🚀🚀🚀🚀🚀🚀🚀🚀");
     } else if (strcmp(command, "/transactions") == 0) {
         send_message("Informationen zu Transaktionen: https://tonviewer.com/EQDk-1Gqc4YIC22LTAAZLxomhkyp-V52B0yaeHgmk3t9LgV_/jetton/EQDYMcZf6OAdtvhJma887wHdyH_dowjYWoiOf9zy5Mm5-q8D");
     } else if (strcmp(command, "/security") == 0) {
@@ -189,7 +189,7 @@ void process_command(const char *command) {
     } else if (strcmp(command, "/support") == 0) {
         send_message("Kontaktiere den Support für weitere Hilfe: @Satoramy @SatoOwnerOfficial");
     } else if (strcmp(command, "/news") == 0) {
-        send_message("Neuigkeiten und Updates zum Bubatz Token: https://t.me/+cygnO0t_nYM3ZGJi");
+        send_message("Neuigkeiten und Updates zum Token: https://t.me/+cygnO0t_nYM3ZGJi");
     } else if (strcmp(command, "/community") == 0) {
         send_message("Treten Sie unserer Community bei und diskutieren Sie mit anderen: https://t.me/BUBATZtokenOFFICIAL");
     } else if (strcmp(command, "/empty") == 0) {
@@ -251,4 +251,5 @@ If you discover a vulnerability in this project, please follow these steps:
 
 Thank you for helping us keep our project secure.
 README
+# TOKEN QUELL CODE
 # BUBATZ TOKEN QUELL CODE
