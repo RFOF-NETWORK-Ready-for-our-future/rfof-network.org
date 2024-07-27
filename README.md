@@ -1,5 +1,11 @@
 # BUBATZ-TOKEN-QUELL-CODE---S
 .github/└── workflows/└── build-and-run-bot.yml/telegram_bot.c 
+mkdir RFOF_BOT
+cd RFOF_BOT
+python3 -m venv venv
+source venv/bin/activate
+pip install pycurl
+nano telegram_bot.c
 git add . 
 git commit -m "Add GitHub Actions workflow and telegram_bot.c" 
 git push origin main
@@ -209,6 +215,8 @@ int main() {
 
     return 0;
 }
+gcc -o telegram_bot telegram_bot.c -lcurl
+./telegram_bot
 
 
 # Security Policy
