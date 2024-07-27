@@ -63,12 +63,12 @@ Balance: 0.200 TON/$1.52
 📈 chart    🔍 scanner
 👆👆👆👆👆👆👆👆📊
 Chart undd scanner comment on the first of August two thousand and twenty-four platform Ston.fi & DeDust.io = 2 | Look forward to new trends and trading opportunities with the $BUBATZ TOKEN (Staking, Mining, trading and swapping) 🚀📊🌏🏙️🪩👑✨
-Mintable: ❌ Yes (Owner)echo "# - Satoramy/BUBATZ-MEME-COIN-BBC-" >> README.md
+Mintable: ❌ Yes (Owner)echo "# - https://github.com/RFOF-NETWORK/BUBATZ-TOKEN-QUELL-CODE---S.git-" >> README.md
 git init
 git add README.md
 git commit -m "erstes Commit"
 git branch -M main
-git remote origin https://github.com/Satoramy/BUBATZ-MEME-COIN-BBC-
+git remote origin https://github.com/RFOF-NETWORK/BUBATZ-TOKEN-QUELL-CODE---S.git
 git push -u origin main
 
 name: @RFOF_BOT
