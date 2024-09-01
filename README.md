@@ -177,7 +177,42 @@ void process_command(const char *command) {
     } else if (strcmp(command, "/info") == 0) {
         send_message("Hi, I'm BUBATZ. Welcome to the TOKEN BOT. I'd like to give you an explanation. The $BBC Token is an innovative meme token based on the TON Blockchain (Telegram Open Network). Our goal is to provide financial support and political advocacy for the cannabis culture in a straightforward manner. To ensure simplicity and direct use, we aim to avoid complex apps or websites.");
     } else if (strcmp(command, "/price") == 0) {
-        send_message("Der aktuelle Preis des Tokens beträgt 0,000000");
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+
+char url[256];
+snprintf(url, sizeof(url), "https://api.telegram.org/bot%s/deleteMessage", TOKEN);
+printf("URL: %s\n", url);
+
+char post_fields[512];
+snprintf(post_fields, sizeof(post_fields), "chat_id=%s&message_id=%s", CHAT_ID, MESSAGE_ID);
+printf("Post-Daten: %s\n", post_fields);
+
+curl_global_init(CURL_GLOBAL_ALL);
+CURL *curl = curl_easy_init();
+
+if (curl) {
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_fields);
+
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        fprintf(stderr, "curl_easy_perform() fehlgeschlagen: %s\n", curl_easy_strerror(res));
+    } else {
+        printf("Nachricht erfolgreich gelöscht!\n");
+    }
+
+    curl_easy_cleanup(curl);
+} else {
+    fprintf(stderr, "Fehler beim Initialisieren von curl\n");
+}
+
+curl_global_cleanup();
+
+     send_message("Der aktuelle Preis des Tokens beträgt 0,000000");
     } else if (strcmp(command, "/buy") == 0) {
         send_message("Anleitungen zum Kauf von Tokens: At the date 01.01.2024 we launch our token with SHIBA INU on TON INU🧿📘");
     } else if (strcmp(command, "/sell") == 0) {
