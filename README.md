@@ -1,257 +1,179 @@
-# BUBATZ-TOKEN-QUELL-CODE---S
-.github/└── workflows/└── build-and-run-bot.yml/telegram_bot.c 
-mkdir RFOF_BOT
-cd RFOF_BOT
-python3 -m venv venv
-source venv/bin/activate
-pip install pycurl
-nano telegram_bot.c
-git add . 
-git commit -m "Add GitHub Actions workflow and telegram_bot.c" 
-git push origin main
-git add . 
-git commit -m "Add GitHub Actions workflow and telegram_bot.c" 
-git push origin main
+BUBATZ-TOKEN-QUELL-CODE---S/
+│
+├── .github/
+│   └── workflows/
+│       └── build-and-run-bot.yml
+├── telegram_bot.c
+├── README.md
+├── SECURITY.md
+└── LICENSE
 
- 👋 Welcome to the TOKEN BOT.
-"@RFOF_BOT API Token 6774549752:AAFx5D-reu3Pu- qkmKLh2aNxumv4faZtRN0"
-(You can change your language:
-"🇬🇧English . . . . . . /langen
-🇷🇺Русский . . . . . . /langru
+# BUBATZ Token Bot
 
-Collaborative translations:
-🇵🇸Arabic     [ 83%] . /langar
-🇧🇷Brazil     [ 64%] . /langbr
-🇨🇳Chinese    [ 53%] . /langcn
-🇪🇸Español    [ 77%] . /langes
-🇫🇷Francais   [ 54%] . /langfr
-🇮🇱Hebrew     [ 44%] . /langhe
-🇮🇩Indonesian [ 62%] . /langid
-🇮🇹Italian    [ 46%] . /langit
-🇲🇾Melayu     [ 67%] . /langms
-🇺🇿О'zbek     [ 54%] . /languz
-🇮🇷Persian    [ 57%] . /langfa
-🇹🇷Türkçe     [ 89%] . /langtr"
+Welcome to the BUBATZ Token Bot! This is a Telegram bot that provides information about the BUBATZ Token, including price, buying and selling instructions, transactions, and more. The bot is written in C and uses the `libcurl` library to send HTTP requests to the Telegram API.
 
-Needs to be translated:
-Deutsch    [ 37%]
-Українська [ 44%]
+## Table of Contents
 
-▍To participate this translation)
-▍@SatoOwnerOfficial
-💎MEME COIN (BBC)  🔗 TON   🏛️ 0,2Lp
-100k $BBC AIRDROP✈️
+- [Installation](#installation)
+- [Usage](#usage)
+- [Available Commands](#available-commands)
+- [GitHub Actions Workflow](#github-actions-workflow)
+- [Security Policies](#security-policies)
+- [License](#license)
 
-"👨‍👩‍👧‍👦 2 holders: 100% | 0%
-@Satoramy
-@SatoOwnerOfficial"
-"token Contract:⭐👑🚀 EQDYMCZF6OADTVHJMA887WHDYH_DOWJYWOIOF9ZY5MM5-Q8D"
+## Installation
 
-💎 MCap: 0,7 $USDT |
-                   0,2 $TON
-💲 Price: $N/A 5m undefined% 1h undefined% 24h undefined% 1W
-📊
-Buys:  undefined
-Sells:  undefined
-Volume 24h:  undefined.
-💧 TON in LP: 0,2 TON.
-🕰️ Age: N/A.
-🍰 Supply: 1.00e+7T.
-❌ Ownership renounced:
-no.
+Follow these steps to compile and run the bot locally:
 
-Balance: 0.200 TON/$1.52  
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/RFOF-NETWORK/BUBATZ-TOKEN-QUELL-CODE---S.git
+    ```
+   
+2. **Navigate to the directory**:
+    ```bash
+    cd BUBATZ-TOKEN-QUELL-CODE---S
+    ```
 
-📈 chart    🔍 scanner
-👆👆👆👆👆👆👆👆📊
-Chart undd scanner comment on the first of August two thousand and twenty-four platform Ston.fi & DeDust.io = 2 | Look forward to new trends and trading opportunities with the $TOKEN (Staking, Mining, trading and swapping) 🚀📊🌏🏙️🪩👑✨
-Mintable: ❌ Yes (Owner)echo "# - https://github.com/RFOF-NETWORK/BUBATZ-TOKEN-QUELL-CODE---S.git-" >> README.md
-git init
-git add README.md
-git commit -m "erstes Commit"
-git branch -M main
-git remote origin https://github.com/RFOF-NETWORK/BUBATZ-TOKEN-QUELL-CODE---S.git
-git push -u origin main
+3. **Compile the C program**:
+    ```bash
+    gcc -o telegram_bot telegram_bot.c -lcurl
+    ```
 
-name: @RFOF_BOT
+4. **Run the bot**:
+    ```bash
+    ./telegram_bot
+    ```
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+## Usage
 
-jobs:
-  build:
-    runs-on: ubuntu-latest  
+The bot processes various Telegram commands that provide information about the BUBATZ Token. It is designed to execute a set of predefined commands on each startup, but it can be easily customized to respond to specific user inputs.
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+## Available Commands
 
-      - name: Setup MSYS2
-        uses: msys2/setup-msys2@v2
-        with:
-          msystem: UCRT64
-          update: true
-          install: git mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-curl
+Here are the commands currently supported by the bot:
 
-      - name: Compile Telegram Bot
-        run: |
-          gcc -o telegram_bot telegram_bot.c -lcurl  
+- `/start`: Greeting and overview of available commands.
+- `/info`: Information about the BUBATZ Token and its goals.
+- `/price`: Current token price.
+- `/buy`: Instructions on how to buy tokens.
+- `/sell`: Instructions on how to sell tokens.
+- `/transactions`: Information on recent transactions.
+- `/security`: Security tips and guidelines.
+- `/support`: Contact information for support.
+- `/news`: Latest news and updates about the token.
+- `/community`: Information about the community and how to join.
+- `/empty`: Clears the list of commands.
+- `/unknown`: Notification for an unknown command.
 
-      - name: Run Telegram Bot
-        run: |
-          ./telegram_bot
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <curl/curl.h>
+## GitHub Actions Workflow
 
-#define TOKEN "AAFx5D-reu3Pu-qkmKLh2aNxumv4faZtRN0"
-#define CHAT_ID "6774549752"
+This repository includes a GitHub Actions workflow that automatically runs when code is pushed to the `main` branch. The workflow performs the following steps:
 
-git add .
-git commit -m "Add GitHub Actions workflow and telegram_bot.c"
-git push origin main
-curl -X POST "https://api.telegram.org/botAAFx5D-reu3Pu-qkmKLh2aNxumv4faZtRN0/sendMessage" -d "chat_id=6774549752&text=Hallo, dies ist ein Test!"
+1. **Clone the repository**: Clones the repository onto an Ubuntu machine.
+2. **Set up MSYS2**: Installs the necessary tools for compiling the C code.
+3. **Compile the bot**: Compiles the Telegram bot.
+4. **Run the bot**: Executes the bot.
 
-char *url_encode(const char *str) {
-    CURL *curl = curl_easy_init();
-    char *encoded = NULL;
+The workflow is located in `.github/workflows/build-and-run-bot.yml`.
 
-    if (curl) {
-        encoded = curl_easy_escape(curl, str, 0);
-        curl_easy_cleanup(curl);
-    }
+## Security Policies
 
-    return encoded;
-}
+If you discover a security vulnerability in this project, please follow these steps:
 
-void send_message(const char *message) {
-    CURL *curl;
-    CURLcode res;
+1. **Contact**: Send an email to [rfof236286@gmail.com](mailto:rfof236286@gmail.com) with details about the vulnerability.
+2. **Acknowledgment**: You will receive an acknowledgment of your report within 48 hours.
+3. **Assessment**: Our team will assess the vulnerability and determine its impact.
+4. **Update**: You will receive updates on the progress of the fix. Our goal is to provide a solution within 7 days.
+5. **Resolution**: Once the vulnerability is resolved, you will be informed, and the update will be rolled out.
 
-    char url[256];
-    snprintf(url, sizeof(url), "https://api.telegram.org/bot%s/sendMessage", TOKEN);
-    printf("URL: %s\n", url);
+## License
 
-    char *encoded_message = url_encode(message);
-    if (!encoded_message) {
-        fprintf(stderr, "Failed to URL encode the message\n");
-        return;
-    }
+This project is licensed under the [MIT License](LICENSE). For more details, see the LICENSE file.
 
-    char post_fields[512];
-    snprintf(post_fields, sizeof(post_fields), "chat_id=%s&text=%s", CHAT_ID, encoded_message);
-    printf("Post Fields: %s\n", post_fields);
 
-    curl_global_init(CURL_GLOBAL_ALL);
-    curl = curl_easy_init();
+# BUBATZ Token Bot
 
-    if (curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, url);
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_fields);
+Welcome to the BUBATZ Token Bot! This is a Telegram bot that provides information about the BUBATZ Token, including price, buying and selling instructions, transactions, and more. The bot is written in C and uses the `libcurl` library to send HTTP requests to the Telegram API.
 
-        res = curl_easy_perform(curl);
-        if (res != CURLE_OK) {
-            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-        } else {
-            printf("Message sent successfully!\n");
-        }
+## Table of Contents
 
-        curl_easy_cleanup(curl);
-    } else {
-        fprintf(stderr, "Failed to initialize curl\n");
-    }
+- [Installation](#installation)
+- [Usage](#usage)
+- [Available Commands](#available-commands)
+- [GitHub Actions Workflow](#github-actions-workflow)
+- [Security Policies](#security-policies)
+- [License](#license)
 
-    curl_global_cleanup();
-    curl_free(encoded_message); chmod +x run_telegram_bot.sh
+## Installation
 
-}
+Follow these steps to compile and run the bot locally:
 
-void process_command(const char *command) {
-    printf("Processing command: %s\n", command);
-    if (strcmp(command, "/start") == 0) {
-        send_message("Willkommen beim Token Help Bot! Hier sind die verfügbaren Befehle: /info, /price, /buy, /sell, /transactions, /security, /support, /news, /community, /empty");
-    } else if (strcmp(command, "/info") == 0) {
-        send_message("Hi, I'm BUBATZ. Welcome to the TOKEN BOT. I'd like to give you an explanation. The $BBC Token is an innovative meme token based on the TON Blockchain (Telegram Open Network). Our goal is to provide financial support and political advocacy for the cannabis culture in a straightforward manner. To ensure simplicity and direct use, we aim to avoid complex apps or websites.");
-    } else if (strcmp(command, "/price") == 0) {
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/RFOF-NETWORK/BUBATZ-TOKEN-QUELL-CODE---S.git
+    ```
+   
+2. **Navigate to the directory**:
+    ```bash
+    cd BUBATZ-TOKEN-QUELL-CODE---S
+    ```
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <curl/curl.h>
+3. **Compile the C program**:
+    ```bash
+    gcc -o telegram_bot telegram_bot.c -lcurl
+    ```
 
-char url[256];
-snprintf(url, sizeof(url), "https://api.telegram.org/bot%s/deleteMessage", TOKEN);
-printf("URL: %s\n", url);
+4. **Run the bot**:
+    ```bash
+    ./telegram_bot
+    ```
 
-char post_fields[512];
-snprintf(post_fields, sizeof(post_fields), "chat_id=%s&message_id=%s", CHAT_ID, MESSAGE_ID);
-printf("Post-Daten: %s\n", post_fields);
+## Usage
 
-curl_global_init(CURL_GLOBAL_ALL);
-CURL *curl = curl_easy_init();
+The bot processes various Telegram commands that provide information about the BUBATZ Token. It is designed to execute a set of predefined commands on each startup, but it can be easily customized to respond to specific user inputs.
 
-if (curl) {
-    curl_easy_setopt(curl, CURLOPT_URL, url);
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_fields);
+## Available Commands
 
-    CURLcode res = curl_easy_perform(curl);
-    if (res != CURLE_OK) {
-        fprintf(stderr, "curl_easy_perform() fehlgeschlagen: %s\n", curl_easy_strerror(res));
-    } else {
-        printf("Nachricht erfolgreich gelöscht!\n");
-    }
+Here are the commands currently supported by the bot:
 
-    curl_easy_cleanup(curl);
-} else {
-    fprintf(stderr, "Fehler beim Initialisieren von curl\n");
-}
+- `/start`: Greeting and overview of available commands.
+- `/info`: Information about the BUBATZ Token and its goals.
+- `/price`: Current token price.
+- `/buy`: Instructions on how to buy tokens.
+- `/sell`: Instructions on how to sell tokens.
+- `/transactions`: Information on recent transactions.
+- `/security`: Security tips and guidelines.
+- `/support`: Contact information for support.
+- `/news`: Latest news and updates about the token.
+- `/community`: Information about the community and how to join.
+- `/empty`: Clears the list of commands.
+- `/unknown`: Notification for an unknown command.
 
-curl_global_cleanup();
+## GitHub Actions Workflow
 
-     send_message("Der aktuelle Preis des Tokens beträgt 0,000000");
-    } else if (strcmp(command, "/buy") == 0) {
-        send_message("Anleitungen zum Kauf von Tokens: At the date 01.01.2024 we launch our token with SHIBA INU on TON INU🧿📘");
-    } else if (strcmp(command, "/sell") == 0) {
-        send_message("Anleitungen zum Verkauf von Tokens: At the date 01.08. You can hold my BBC Token on major websites: Ston.fi, DeDust.io, and Gecko🚀🚀🚀🚀🚀🚀🚀🚀🚀");
-    } else if (strcmp(command, "/transactions") == 0) {
-        send_message("Informationen zu Transaktionen: https://tonviewer.com/EQDk-1Gqc4YIC22LTAAZLxomhkyp-V52B0yaeHgmk3t9LgV_/jetton/EQDYMcZf6OAdtvhJma887wHdyH_dowjYWoiOf9zy5Mm5-q8D");
-    } else if (strcmp(command, "/security") == 0) {
-        send_message("Sicherheitstipps und Hinweise: https://tonviewer.com/privacy");
-    } else if (strcmp(command, "/support") == 0) {
-        send_message("Kontaktiere den Support für weitere Hilfe: @Satoramy @SatoOwnerOfficial");
-    } else if (strcmp(command, "/news") == 0) {
-        send_message("Neuigkeiten und Updates zum Token: https://t.me/+cygnO0t_nYM3ZGJi");
-    } else if (strcmp(command, "/community") == 0) {
-        send_message("Treten Sie unserer Community bei und diskutieren Sie mit anderen: https://t.me/BUBATZtokenOFFICIAL");
-    } else if (strcmp(command, "/empty") == 0) {
-        send_message("Liste wurde geleert.");
-    } else {
-        send_message("Unbekannter Befehl.");
-    }
-}
+This repository includes a GitHub Actions workflow that automatically runs when code is pushed to the `main` branch. The workflow performs the following steps:
 
-int main() {
-    process_command("/start");
-    process_command("/info");
-    process_command("/price");
-    process_command("/buy");
-    process_command("/sell");
-    process_command("/transactions");
-    process_command("/security");
-    process_command("/support");
-    process_command("/news");
-    process_command("/community");
-    process_command("/empty");
-    process_command("/unknown");
+1. **Clone the repository**: Clones the repository onto an Ubuntu machine.
+2. **Set up MSYS2**: Installs the necessary tools for compiling the C code.
+3. **Compile the bot**: Compiles the Telegram bot.
+4. **Run the bot**: Executes the bot.
 
-    return 0;
-}
-gcc -o telegram_bot telegram_bot.c -lcurl
-./telegram_bot
+The workflow is located in `.github/workflows/build-and-run-bot.yml`.
+
+## Security Policies
+
+If you discover a security vulnerability in this project, please follow these steps:
+
+1. **Contact**: Send an email to [rfof236286@gmail.com](mailto:rfof236286@gmail.com) with details about the vulnerability.
+2. **Acknowledgment**: You will receive an acknowledgment of your report within 48 hours.
+3. **Assessment**: Our team will assess the vulnerability and determine its impact.
+4. **Update**: You will receive updates on the progress of the fix. Our goal is to provide a solution within 7 days.
+5. **Resolution**: Once the vulnerability is resolved, you will be informed, and the update will be rolled out.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). For more details, see the LICENSE file.
 
 
 # Security Policy
