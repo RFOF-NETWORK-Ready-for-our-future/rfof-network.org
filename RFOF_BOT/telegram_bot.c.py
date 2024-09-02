@@ -21,7 +21,14 @@ CONTRACT_ADDRESS = "EQDYMcZf6OAdtvhJma887wHdyH_dowjYWoiOf9zy5Mm5-q8D"
 ABI_FILE = "jetton_token.abi.json"
 BASE_URL = "https://tonapi.io/v2"
 TOKEN = os.getenv("TELEGRAM_BOT_API_KEY")
-CHAT_ID = "6774549752"
+
+# Token-Daten
+TOTAL_SUPPLY = 999999999999999999999999900
+MINTABLE = True
+ADMIN_ADDRESS = "0:e4fb51aa7386080b6d8b4c00192f1a26864ca9f95e76074c9a787826937b7d2e"
+MASTER_ADDRESS = "EQDYMcZf6OAdtvhJma887wHdyH_dowjYWoiOf9zy5Mm5-q8D"
+JETTON_CONTENT = "Metadata about the token"
+JETTON_WALLET_CODE = "Smart contract code for the Jetton wallet"
 
 # ABI für das Jetton Token definieren
 abi = Abi.from_file(ABI_FILE)
@@ -104,10 +111,19 @@ def get_jettons(account_id):
 
 # Telegram-Bot-Befehle
 def start(update: Update, context: CallbackContext):
-    send_message(update.message.chat_id, "Willkommen beim Token Help Bot! Hier sind die verfügbaren Befehle: /info, /price, /buy, /sell, /transactions, /security, /support, /news, /community, /empty")
+    send_message(update.message.chat_id, "Willkommen beim Token Help Bot! Hier sind die verfügbaren Befehle: /info, /price, /balance, /transfer, /transactions, /security, /support, /news, /community, /empty")
 
 def info(update: Update, context: CallbackContext):
-    send_message(update.message.chat_id, "Hi, ich bin BUBATZ. Willkommen beim TOKEN BOT. Hier ist eine Erklärung...")
+    message = (
+        f"Token Info:\n"
+        f"Total Supply: {TOTAL_SUPPLY}\n"
+        f"Mintable: {MINTABLE}\n"
+        f"Admin Address: {ADMIN_ADDRESS}\n"
+        f"Master Address: {MASTER_ADDRESS}\n"
+        f"Jetton Content: {JETTON_CONTENT}\n"
+        f"Jetton Wallet Code: {JETTON_WALLET_CODE}"
+    )
+    send_message(update.message.chat_id, message)
 
 def price(update: Update, context: CallbackContext):
     rates = get_token_rates()
@@ -158,6 +174,9 @@ def main():
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
 
+    # Debugging-Ausgabe
+    logger.info("Bot ist gestartet")
+
     # Handler registrieren
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("info", info))
@@ -174,6 +193,7 @@ def main():
 
     # Bot starten
     updater.start_polling()
+    logger.info("Bot polling gestartet")
     updater.idle()
 
 if __name__ == "__main__":
