@@ -1,0 +1,13 @@
+pip install ton-client
+TON-Blockchain
+ton-client
+python-telegram-bot
+requests
+tonweb
+ton-client-java
+ton-client-cpp
+ton-sdk
+tonapi
+TONSwap
+TON Finance
+TON Yield Farming
