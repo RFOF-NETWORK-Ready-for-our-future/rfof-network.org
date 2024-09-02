@@ -14,17 +14,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup MSYS2
-        uses: msys2/setup-msys2@v2
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
-          msystem: UCRT64
-          update: true
-          install: git mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-curl
+          python-version: '3.10'  # Stelle sicher, dass die Python-Version zu deinem Projekt passt
 
-      - name: Compile Telegram Bot
+      - name: Install Dependencies
         run: |
-          gcc -o telegram_bot telegram_bot.c -lcurl  
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Stelle sicher, dass alle erforderlichen Pakete in requirements.txt aufgeführt sind
 
       - name: Run Telegram Bot
         run: |
-          ./telegram_bot
+          python path/to/your_script.py  # Ersetze 'path/to/your_script.py' durch den tatsächlichen Pfad zu deinem Python-Skript
