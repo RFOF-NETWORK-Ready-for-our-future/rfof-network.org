@@ -12,6 +12,23 @@ BUBATZ-TOKEN-QUELL-CODE---S/
 
 Welcome to the BUBATZ Token Bot! This is a Telegram bot that provides information about the BUBATZ Token, including price, buying and selling instructions, transactions, and more. The bot is written in C and uses the `libcurl` library to send HTTP requests to the Telegram API.
 
+1. **Token data**:
+
+- **Total Supply**: 999999999999999999999999900 (This is the maximum number of jets that can be minted.)
+
+- **Mintable**: true (The token can still be minted.)
+
+- **Admin Address**: 0:e4fb51aa7386080b6d8b4c00192f1a26864ca9f95e76074c9a787826937b7d2e (The address of the administrator who has rights to manage the token.)
+
+- **Jetton Content**: Contains metadata of the token, such as the name and description.
+
+- **Jetton Wallet Code**: The code of the smart contract that defines the logic for the Jetton wallet.
+
+2. **Jetton addresses**:
+
+- **Master Address**: EQDYMcZf6OAdtvhJma887wHdyH_dowjYWoiOf9zy5Mm5-q8D
+
+
 ## Table of Contents
 
 - [Installation](#installation)
