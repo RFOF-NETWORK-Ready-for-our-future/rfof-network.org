@@ -8,26 +8,12 @@ BUBATZ-TOKEN-QUELL-CODE---S/
 ├── SECURITY.md
 └── LICENSE
 
+Here is the revised `README.md` file, incorporating the existing content and maintaining the original order of chapters:
+
+```markdown
 # BUBATZ Token Bot
 
 Welcome to the BUBATZ Token Bot! This is a Telegram bot that provides information about the BUBATZ Token, including price, buying and selling instructions, transactions, and more. The bot is written in C and uses the `libcurl` library to send HTTP requests to the Telegram API.
-
-1. **Token data**:
-
-- **Total Supply**: 999999999999999999999999900 (This is the maximum number of jets that can be minted.)
-
-- **Mintable**: true (The token can still be minted.)
-
-- **Admin Address**: 0:e4fb51aa7386080b6d8b4c00192f1a26864ca9f95e76074c9a787826937b7d2e (The address of the administrator who has rights to manage the token.)
-
-- **Jetton Content**: Contains metadata of the token, such as the name and description.
-
-- **Jetton Wallet Code**: The code of the smart contract that defines the logic for the Jetton wallet.
-
-2. **Jetton addresses**:
-
-- **Master Address**: EQDYMcZf6OAdtvhJma887wHdyH_dowjYWoiOf9zy5Mm5-q8D
-
 
 ## Table of Contents
 
@@ -108,7 +94,34 @@ If you discover a security vulnerability in this project, please follow these st
 
 This project is licensed under the [MIT License](LICENSE). For more details, see the LICENSE file.
 
-### 1. Open-Source-Softwareentwicklung
+# Security Policy
+
+## Supported Versions
+
+Use this section to tell people about which versions of your project are currently being supported with security updates.
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 5.1.x   | :white_check_mark: |
+| 5.0.x   | :x:                |
+| 4.0.x   | :white_check_mark: |
+| < 4.0   | :x:                |
+
+## Reporting a Vulnerability
+
+If you discover a vulnerability in this project, please follow these steps:
+
+1. **Contact**: Send an email to [rfof236286@gmail.com](mailto:rfof236286@gmail.com) with details of the vulnerability.
+2. **Acknowledgement**: You will receive an acknowledgment of your report within 48 hours.
+3. **Assessment**: Our team will assess the vulnerability and determine its impact.
+4. **Update**: You will receive updates on the progress of the fix. We aim to provide a fix within 7 days of reporting.
+5. **Resolution**: Once the vulnerability is resolved, you will be informed, and the update will be rolled out.
+
+Thank you for helping us keep our project secure.
+
+# License Descriptions
+
+## Open-Source Software Development
 
 **GNU General Public License (GPL)**
 ```markdown
@@ -124,7 +137,7 @@ The GNU General Public License (GPL) is a free software license that ensures the
 For more details, see the full GPL text at [GNU GPL](https://www.gnu.org/licenses/gpl-3.0.html).
 ```
 
-**MIT-Lizenz**
+**MIT License**
 ```markdown
 # MIT License
 
@@ -138,7 +151,7 @@ The MIT License is a permissive free software license that allows developers to 
 For more details, see the full MIT License text at [MIT License](https://opensource.org/licenses/MIT).
 ```
 
-### 2. Webentwicklung und SaaS (Software as a Service)
+## Web Development and SaaS (Software as a Service)
 
 **Apache License 2.0**
 ```markdown
@@ -168,7 +181,7 @@ The Creative Commons Attribution 4.0 License allows others to share, remix, adap
 For more details, see the full CC BY 4.0 text at [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 ```
 
-### 3. Design und Kreativagenturen
+## Design and Creative Agencies
 
 **Creative Commons Attribution-NonCommercial (CC BY-NC)**
 ```markdown
@@ -198,7 +211,7 @@ The Proprietary License grants specific rights to the licensee while retaining o
 For more details, see the specific terms provided by the licensor.
 ```
 
-### 4. Datenanalyse und maschinelles Lernen
+## Data Analysis and Machine Learning
 
 **GNU Affero General Public License (AGPL)**
 ```markdown
@@ -222,13 +235,15 @@ The Open Database License (ODbL) allows users to freely use, modify, and distrib
 
 ## Key Points
 - Allows for use, modification, and distribution of databases.
+
+
 - Requires attribution and preservation of license.
 - Derived databases must also be shared under ODbL.
 
 For more details, see the full ODbL text at [ODbL](https://opendatacommons.org/licenses/odbl/).
 ```
 
-### 5. Pharmazeutische Forschung und Biotechnologie
+## Pharmaceutical Research and Biotechnology
 
 **Proprietary License with Research-Use Exception**
 ```markdown
@@ -258,7 +273,7 @@ The Creative Commons Attribution-NonCommercial-NoDerivatives License allows othe
 For more details, see the full CC BY-NC-ND text at [CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/).
 ```
 
-### 6. Online-Bildung und eLearning-Plattformen
+## Online Education and eLearning Platforms
 
 **Creative Commons Attribution-ShareAlike (CC BY-SA)**
 ```markdown
@@ -288,7 +303,7 @@ The Proprietary eLearning License grants access to educational materials with sp
 For more details, see the specific terms provided by the licensor.
 ```
 
-### 7. Musikproduktion und Audio-Technologie
+## Music Production and Audio Technology
 
 **Creative Commons Attribution-NonCommercial-ShareAlike (CC BY-NC-SA)**
 ```markdown
@@ -318,9 +333,9 @@ The Proprietary Music License grants specific rights for the use of music for co
 For more details, see the specific terms provided by the licensor.
 ```
 
-### 8. E-Commerce und Online-Marktplätze
+## E-Commerce and Online Marketplaces
 
-**GNU General Public License (GPL) für Plugins/Themes**
+**GNU General Public License (GPL) for Plugins/Themes**
 ```markdown
 # GNU General Public License (GPL) for Plugins/Themes
 
@@ -338,123 +353,15 @@ For more details, see the full GPL text at [GNU GPL](https://www.gnu.org/license
 ```markdown
 # Proprietary License for Commercial Use
 
-This Proprietary License allows for the use of digital products
+This Proprietary License allows for the use of digital products with specific restrictions and rights defined by the licensor. It typically includes terms related to usage, redistribution, and modification.
 
-# BUBATZ Token Bot
+## Key Points
+- Grants specific rights for commercial use.
+- Includes restrictions on redistribution and modification.
+- Custom terms defined by the licensor.
 
-Welcome to the BUBATZ Token Bot! This is a Telegram bot that provides information about the BUBATZ Token, including price, buying and selling instructions, transactions, and more. The bot is written in C and uses the `libcurl` library to send HTTP requests to the Telegram API.
+For more details, see the specific terms provided by the licensor.
+```
+```
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Available Commands](#available-commands)
-- [GitHub Actions Workflow](#github-actions-workflow)
-- [Security Policies](#security-policies)
-- [License](#license)
-
-## Installation
-
-Follow these steps to compile and run the bot locally:
-
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/RFOF-NETWORK/BUBATZ-TOKEN-QUELL-CODE---S.git
-    ```
-   
-2. **Navigate to the directory**:
-    ```bash
-    cd BUBATZ-TOKEN-QUELL-CODE---S
-    ```
-
-3. **Compile the C program**:
-    ```bash
-    gcc -o telegram_bot telegram_bot.c -lcurl
-    ```
-
-4. **Run the bot**:
-    ```bash
-    ./telegram_bot
-    ```
-
-## Usage
-
-The bot processes various Telegram commands that provide information about the BUBATZ Token. It is designed to execute a set of predefined commands on each startup, but it can be easily customized to respond to specific user inputs.
-
-## Available Commands
-
-Here are the commands currently supported by the bot:
-
-- `/start`: Greeting and overview of available commands.
-- `/info`: Information about the BUBATZ Token and its goals.
-- `/price`: Current token price.
-- `/buy`: Instructions on how to buy tokens.
-- `/sell`: Instructions on how to sell tokens.
-- `/transactions`: Information on recent transactions.
-- `/security`: Security tips and guidelines.
-- `/support`: Contact information for support.
-- `/news`: Latest news and updates about the token.
-- `/community`: Information about the community and how to join.
-- `/empty`: Clears the list of commands.
-- `/unknown`: Notification for an unknown command.
-
-## GitHub Actions Workflow
-
-This repository includes a GitHub Actions workflow that automatically runs when code is pushed to the `main` branch. The workflow performs the following steps:
-
-1. **Clone the repository**: Clones the repository onto an Ubuntu machine.
-2. **Set up MSYS2**: Installs the necessary tools for compiling the C code.
-3. **Compile the bot**: Compiles the Telegram bot.
-4. **Run the bot**: Executes the bot.
-
-The workflow is located in `.github/workflows/build-and-run-bot.yml`.
-
-## Security Policies
-
-If you discover a security vulnerability in this project, please follow these steps:
-
-1. **Contact**: Send an email to [rfof236286@gmail.com](mailto:rfof236286@gmail.com) with details about the vulnerability.
-2. **Acknowledgment**: You will receive an acknowledgment of your report within 48 hours.
-3. **Assessment**: Our team will assess the vulnerability and determine its impact.
-4. **Update**: You will receive updates on the progress of the fix. Our goal is to provide a solution within 7 days.
-5. **Resolution**: Once the vulnerability is resolved, you will be informed, and the update will be rolled out.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE). For more details, see the LICENSE file.
-
-
-# Security Policy
-
-## Supported Versions
-
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
-
-## Reporting a Vulnerability
-
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
-
-If you discover a vulnerability in this project, please follow these steps:
-
-1. **Contact**: Send an email to [rfof236286@gmail.com ] with details of the vulnerability.
-2. **Acknowledgement**: You will receive an acknowledgment of your report within 48 hours.
-3. **Assessment**: Our team will assess the vulnerability and determine its impact.
-4. **Update**: You will receive updates on the progress of the fix. We aim to provide a fix within 7 days of reporting.
-5. **Resolution**: Once the vulnerability is resolved, you will be informed, and the update will be rolled out.
-
-Thank you for helping us keep our project secure.
-README
-# TOKEN QUELL CODE
-# BUBATZ TOKEN QUELL CODE
+This format retains the original structure and chapters while ensuring clarity and organization.
