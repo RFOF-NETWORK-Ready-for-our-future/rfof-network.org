@@ -1,5 +1,10 @@
 name: @RFOF_BOT
 
+# Token und Chat-ID aus Umgebungsvariablen lesen
+TOKEN = os.getenv("TELEGRAM_BOT_API_KEY")
+CHAT_ID = "6386147374"  # Hier die spezifische Chat-ID einfügen
+
+
 on:
   push:
     branches: [ main ]
