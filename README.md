@@ -13,6 +13,11 @@ BUBATZ-TOKEN-QUELL-CODE---S/
 
 Welcome to the BUBATZ Token Bot! This is a Telegram bot designed to provide information about the BUBATZ Token, including its price, buying and selling instructions, recent transactions, and more. The bot is implemented in Python and uses the `python-telegram-bot` library for interacting with the Telegram API.
 
+# Token und Chat-ID aus Umgebungsvariablen lesen
+TOKEN = os.getenv("TELEGRAM_BOT_API_KEY")
+CHAT_ID = "6386147374"  # Hier die spezifische Chat-ID einfügen
+
+
 ## Table of Contents
 
 - [Installation](#installation)
