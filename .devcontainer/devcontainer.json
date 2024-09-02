@@ -7,7 +7,7 @@
   },
   "postCreateCommand": "pip install -r requirements.txt && echo 'Setting up environment...'",
   "environment": {
-    "BOT_TOKEN": "dein-bot-token-hier",
+    "BOT_TOKEN": "6774549752:AAFx5D-reu3Pu-qkmKLh2aNxumv4faZtRN0",
     "BOT_CHAT_ID": "6386147374",
     "BOT_FIRST_NAME": "RFOF🧠👁️‍🗨️ $BUBATZ️",
     "BOT_LAST_NAME": "SATORAMY﻿﻿﻿💎️",
@@ -21,5 +21,17 @@
     "JETTON_HOLDER_ADDRESS": "EQDYMcZf6OAdtvhJma887wHdyH_dowjYWoiOf9zy5Mm5-q8D",
     "JETTON_HEY_HASH": "8da55a166c83c8cea677f2fbb4925ef81eda782cee73bacaa82d5c4e87882138",
     "JETTON_DATA_EXIT_CODE": "0"
-  }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder}/telegram_bot.c,target=/workspace/telegram_bot.c,type=bind"
+  ],
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "python.pythonPath": "/usr/local/bin/python",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true
+  },
+  "extensions": [
+    "ms-python.python"
+  ]
 }
