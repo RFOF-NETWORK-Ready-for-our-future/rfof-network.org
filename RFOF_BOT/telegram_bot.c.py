@@ -6,6 +6,10 @@ from tonclient import TonClient, Abi, Contract, Message
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
 
+# Token und Chat-ID aus Umgebungsvariablen lesen
+TOKEN = os.getenv("TELEGRAM_BOT_API_KEY")
+CHAT_ID = "6386147374"  # Hier die spezifische Chat-ID einfügen
+
 # Umgebungsvariablen aus der .env-Datei laden
 load_dotenv()
 
