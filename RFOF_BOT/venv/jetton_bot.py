@@ -1,4 +1,4 @@
-TOKEN = os.getenv("TELEGRAM_BOT_API_KEY") ("6774549752:AAFx5D-reu3Pu-qkmKLh2aNxumv4faZtRN0")
+TOKEN = os.getenv("6774549752:AAFx5D-reu3Pu-qkmKLh2aNxumv4faZtRN0") ("6774549752:AAFx5D-reu3Pu-qkmKLh2aNxumv4faZtRN0")
 
 f"Total Supply: 999999999999999999999999900\n"
         f"Mintable: true\n"
