@@ -7,7 +7,7 @@ from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
 
 # Token und Chat-ID aus Umgebungsvariablen lesen
-TOKEN = os.getenv("TELEGRAM_BOT_API_KEY")
+TOKEN = os.getenv("6774549752:AAFx5D-reu3Pu-qkmKLh2aNxumv4faZtRN0")
 CHAT_ID = "6386147374"  # Hier die spezifische Chat-ID einfügen
 
 # Umgebungsvariablen aus der .env-Datei laden
@@ -15,7 +15,7 @@ load_dotenv()
 
 # Logging einrichten
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__BUBATZ-MANAGER__)
 
 # TON Client initialisieren
 client = TonClient(network="mainnet")
