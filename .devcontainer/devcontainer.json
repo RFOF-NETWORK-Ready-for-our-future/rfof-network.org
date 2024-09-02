@@ -5,7 +5,14 @@
       "version": "20.10.7"
     }
   },
+  "hostRequirements": {
+    "cpus": 4
+  },
   "postCreateCommand": "pip install -r requirements.txt && echo 'Setting up environment...'",
+  "updateContentCommand": "npm install",
+  "postAttachCommand": {
+    "server": "npm start"
+  },
   "environment": {
     "BOT_TOKEN": "6774549752:AAFx5D-reu3Pu-qkmKLh2aNxumv4faZtRN0",
     "BOT_CHAT_ID": "6386147374",
@@ -33,5 +40,19 @@
   },
   "extensions": [
     "ms-python.python"
-  ]
+  ],
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "src/App.jsx"
+      ]
+    }
+  },
+  "portsAttributes": {
+    "3000": {
+      "label": "Application",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "forwardPorts": [3000]
 }
