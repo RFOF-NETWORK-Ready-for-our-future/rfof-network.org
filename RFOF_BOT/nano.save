@@ -3,8 +3,10 @@ clude <stdio.h>
 #include <string.h> 
 #include <curl/curl.h> 
 #define TOKEN 
-#"DEIN_BOT_TOKEN_HIER" 
-#define CHAT_ID 
+# Token und Chat-ID aus Umgebungsvariablen lesen
+TOKEN = os.getenv("TELEGRAM_BOT_API_KEY")
+CHAT_ID = "6386147374"  # Hier die spezifische Chat-ID einfügen
+
 #"DEINE_CHAT_ID_HIER"
 char *url_encode(const 
 char *str) {
