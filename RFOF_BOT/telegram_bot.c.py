@@ -6,37 +6,37 @@ from tonclient import TonClient, Abi, Contract, Message
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
 
-# Load environment variables from .env file
+# Umgebungsvariablen aus der .env-Datei laden
 load_dotenv()
 
-# Set up logging
+# Logging einrichten
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Initialize the TON Client
+# TON Client initialisieren
 client = TonClient(network="mainnet")
 
-# Define constants
+# Konstanten definieren
 CONTRACT_ADDRESS = "EQDYMcZf6OAdtvhJma887wHdyH_dowjYWoiOf9zy5Mm5-q8D"
 ABI_FILE = "jetton_token.abi.json"
 BASE_URL = "https://tonapi.io/v2"
 TOKEN = os.getenv("TELEGRAM_BOT_API_KEY")
 CHAT_ID = "6774549752"
 
-# Define the ABI for the Jetton Token
+# ABI für das Jetton Token definieren
 abi = Abi.from_file(ABI_FILE)
 
-# Define API keys from environment variables
+# API-Keys aus Umgebungsvariablen
 api_keys = {
     "storage_mapper_declarations": os.getenv("STORAGE_MAPPER_DECLARATIONS_API_KEY"),
     "token_rates": os.getenv("TOKEN_RATES_API_KEY"),
 }
 
-# Function to URL encode the message
+# URL-kodieren der Nachricht
 def url_encode(message):
     return requests.utils.quote(message)
 
-# Function to send a message via Telegram
+# Nachricht über Telegram senden
 def send_message(chat_id, message):
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
     payload = {
@@ -45,11 +45,11 @@ def send_message(chat_id, message):
     }
     response = requests.post(url, data=payload)
     if response.status_code != 200:
-        logger.error(f"Failed to send message: {response.status_code} - {response.text}")
+        logger.error(f"Nachricht konnte nicht gesendet werden: {response.status_code} - {response.text}")
     else:
-        logger.info("Message sent successfully!")
+        logger.info("Nachricht erfolgreich gesendet!")
 
-# Function to get the balance of an address
+# Guthaben einer Adresse abrufen
 def get_balance(address):
     try:
         result = client.call_function(
@@ -59,10 +59,10 @@ def get_balance(address):
         )
         return result["value"]
     except Exception as e:
-        logger.error(f"Error getting balance: {e}")
-        return "Error retrieving balance"
+        logger.error(f"Fehler beim Abrufen des Guthabens: {e}")
+        return "Fehler beim Abrufen des Guthabens"
 
-# Function to transfer tokens
+# Tokens übertragen
 def transfer_tokens(from_address, to_address, amount, private_key):
     try:
         message = Message(
@@ -73,64 +73,64 @@ def transfer_tokens(from_address, to_address, amount, private_key):
         result = client.send_message(message)
         return result
     except Exception as e:
-        logger.error(f"Error transferring tokens: {e}")
-        return "Error during token transfer"
+        logger.error(f"Fehler bei der Übertragung von Tokens: {e}")
+        return "Fehler bei der Token-Übertragung"
 
-# Function to get token rates using the API key
+# Token-Kurse abrufen
 def get_token_rates():
     try:
         headers = {
             "Authorization": f"Bearer {api_keys['token_rates']}"
         }
         response = requests.get(f"{BASE_URL}/rates", headers=headers)
-        response.raise_for_status()  # Raise an exception for HTTP errors
+        response.raise_for_status()  # Ausnahme bei HTTP-Fehlern auslösen
         return response.json()
     except requests.RequestException as e:
-        logger.error(f"Error getting token rates: {e}")
-        return "Error retrieving token rates"
+        logger.error(f"Fehler beim Abrufen der Token-Kurse: {e}")
+        return "Fehler beim Abrufen der Token-Kurse"
 
-# Function to get Jettons for a specific account
+# Jettons für ein bestimmtes Konto abrufen
 def get_jettons(account_id):
     try:
         headers = {
             "Authorization": f"Bearer {api_keys['storage_mapper_declarations']}"
         }
         response = requests.get(f"{BASE_URL}/accounts/{account_id}/jettons", headers=headers)
-        response.raise_for_status()  # Raise an exception for HTTP errors
+        response.raise_for_status()  # Ausnahme bei HTTP-Fehlern auslösen
         return response.json()
     except requests.RequestException as e:
-        logger.error(f"Error getting jettons: {e}")
-        return "Error retrieving jettons"
+        logger.error(f"Fehler beim Abrufen der Jettons: {e}")
+        return "Fehler beim Abrufen der Jettons"
 
-# Telegram bot commands
+# Telegram-Bot-Befehle
 def start(update: Update, context: CallbackContext):
     send_message(update.message.chat_id, "Willkommen beim Token Help Bot! Hier sind die verfügbaren Befehle: /info, /price, /buy, /sell, /transactions, /security, /support, /news, /community, /empty")
 
 def info(update: Update, context: CallbackContext):
-    send_message(update.message.chat_id, "Hi, I'm BUBATZ. Welcome to the TOKEN BOT. I'd like to give you an explanation...")
+    send_message(update.message.chat_id, "Hi, ich bin BUBATZ. Willkommen beim TOKEN BOT. Hier ist eine Erklärung...")
 
 def price(update: Update, context: CallbackContext):
     rates = get_token_rates()
-    send_message(update.message.chat_id, f"Current token rates: {rates}")
+    send_message(update.message.chat_id, f"Aktuelle Token-Kurse: {rates}")
 
 def balance(update: Update, context: CallbackContext):
     try:
-        address = context.args[0]  # Expecting the wallet address to be passed as an argument
+        address = context.args[0]  # Erwartet die Wallet-Adresse als Argument
         balance = get_balance(address)
-        send_message(update.message.chat_id, f"Balance for {address}: {balance}")
+        send_message(update.message.chat_id, f"Guthaben für {address}: {balance}")
     except IndexError:
-        send_message(update.message.chat_id, "Please provide a wallet address.")
+        send_message(update.message.chat_id, "Bitte geben Sie eine Wallet-Adresse an.")
 
 def transfer(update: Update, context: CallbackContext):
     try:
         from_address = context.args[0]
         to_address = context.args[1]
         amount = int(context.args[2])
-        private_key = context.args[3]  # Be cautious with handling private keys
+        private_key = context.args[3]  # Vorsicht bei der Handhabung von privaten Schlüsseln
         result = transfer_tokens(from_address, to_address, amount, private_key)
-        send_message(update.message.chat_id, f"Transfer result: {result}")
+        send_message(update.message.chat_id, f"Ergebnis der Übertragung: {result}")
     except (IndexError, ValueError) as e:
-        send_message(update.message.chat_id, f"Error: {e}")
+        send_message(update.message.chat_id, f"Fehler: {e}")
 
 def transactions(update: Update, context: CallbackContext):
     send_message(update.message.chat_id, "Informationen zu Transaktionen: https://tonviewer.com/...")
@@ -154,11 +154,11 @@ def handle_unknown(update: Update, context: CallbackContext):
     send_message(update.message.chat_id, "Unbekannter Befehl.")
 
 def main():
-    # Initialize the Telegram bot
+    # Telegram-Bot initialisieren
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
 
-    # Register handlers
+    # Handler registrieren
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("info", info))
     dp.add_handler(CommandHandler("price", price))
@@ -172,7 +172,7 @@ def main():
     dp.add_handler(CommandHandler("empty", empty))
     dp.add_handler(CommandHandler("unknown", handle_unknown))
 
-    # Start the Bot
+    # Bot starten
     updater.start_polling()
     updater.idle()
 
