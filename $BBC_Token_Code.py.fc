@@ -2539,3 +2539,28 @@ SETCP0
 DICTIGETJMPZ
 11 THROWARG
 
+# Beispiel für den erweiterten Code zur Berechnung der Gebühr und zum Senden an den Pool
+
+def calculate_fee(amount):
+    fee_percentage = 0.0001  # 0,01%
+    fee = amount * fee_percentage
+    return fee
+
+def send_tokens(sender, recipient, amount):
+    # Implementiere hier den Code zum Senden von Tokens
+    pass
+
+def process_transaction(sender, recipient, amount):
+    # Berechnung der Gebühr
+    fee = calculate_fee(amount)
+    amount_after_fee = amount - fee
+    
+    # Durchführung der Haupttransaktion
+    send_tokens(sender, recipient, amount_after_fee)
+    
+    # Gebühr an den Liquiditätspool senden
+    liquidity_pool_address = "EQDoEf5ZMYN-fEvfu-DPoBsxt_ErDo9bxujTc6_FeWH_VGU8"
+    send_tokens(sender, liquidity_pool_address, fee)
+
+# Falls es im bestehenden Code eine Funktion wie `transfer` gibt, füge `process_transaction` dort ein
+
