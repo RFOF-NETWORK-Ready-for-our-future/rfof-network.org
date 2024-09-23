@@ -2547,14 +2547,155 @@ def calculate_fee(amount):
     return fee
 
 def send_tokens(sender, recipient, amount):
-    # Implementiere hier den Code zum Senden von Tokens
-    pass
+    # Implementiere import requests
+import os
+import logging
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
+
+# Set up necessary API keys from your TON Console
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_API_KEY")
+TON_API_KEY = os.getenv("TON_API_KEY")  # TON Console API key
+
+# Addresses for the CTC LP token and donation wallets
+CTC_LP_TOKEN_ADDRESS = "EQDoEf5ZMYN-fEvfu-DPoBsxt_ErDo9bxujTc6_FeWH_VGU8"
+NOT_COIN_ADDRESS = "EQCPyOSZu5-OpEVh539dCIKmS02luA6zkB2KXDFWBaCZe"
+USDT_ADDRESS = "EQBIAced5W3sraQJOI3Yeu8JhXNrDnWt8EIG6Cz910wSwBF3"
+
+# Logger for handling errors and monitoring performance
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger()
+
+# Thread pool for running functions concurrently
+executor = ThreadPoolExecutor(max_workers=10)
+
+# TONAPI client for fetching transaction details
+class TONAPI:
+    def __init__(self, api_key):
+        self.api_key = api_key
+        self.base_url = "https://tonapi.io/v2"
+
+    async def get_transaction_details(self, tx_hash):
+        url = f"{self.base_url}/traces/{tx_hash}"
+        headers = {"Authorization": f"Bearer {self.api_key}"}
+        
+        async with requests.Session() as session:
+            response = await session.get(url, headers=headers)
+
+        if response.status_code == 200:
+            return response.json()
+        else:
+            raise Exception(f"Failed to fetch transaction: {response.status_code}, {response.text}")
+
+# Process a batch of transactions concurrently
+async def process_transactions_concurrently(tx_hashes):
+    tasks = [process_transaction(tx_hash) for tx_hash in tx_hashes]
+    await asyncio.gather(*tasks)
+
+# Process individual transaction
+async def process_transaction(tx_hash):
+    try:
+        ton_api = TONAPI(TON_API_KEY)
+        tx_details = await ton_api.get_transaction_details(tx_hash)
+        
+        # Extracting transaction info
+        sender_address = tx_details.get('from')
+        recipient_address = tx_details.get('to')
+        amount = tx_details.get('value', 0)  # Amount in indivisible units
+
+        if not sender_address or not recipient_address:
+            logger.warning(f"Invalid transaction: Missing sender/recipient for tx_hash: {tx_hash}")
+            return
+
+        # Determine transaction type and handle accordingly
+        if recipient_address == CTC_LP_TOKEN_ADDRESS:
+            await grow_lp_pool(amount)
+        elif recipient_address == NOT_COIN_ADDRESS:
+            await handle_not_coin_donation(sender_address, amount)
+        elif recipient_address == USDT_ADDRESS:
+            await handle_usdt_donation(sender_address, amount)
+        else:
+            logger.info(f"Transaction {tx_hash} not related to known addresses.")
+    
+    except Exception as e:
+        logger.error(f"Error processing transaction {tx_hash}: {str(e)}")
+
+# Example function to grow the LP pool
+async def grow_lp_pool(amount):
+    """
+    Simulates adding liquidity to the LP token pool (CTC).
+    """
+    logger.info(f"Growing CTC LP pool by {amount} units...")
+    # Logic to adjust LP pool smart contract goes here
+
+# Handle NOT Coin donations
+async def handle_not_coin_donation(sender, amount):
+    """
+    Logic for handling NOT Coin donations.
+    """
+    logger.info(f"NOT Coin donation from {sender} for {amount} units.")
+    # Logic to process the donation goes here
+
+# Handle USDT donations
+async def handle_usdt_donation(sender, amount):
+    """
+    Logic for handling USDT donations.
+    """
+    logger.info(f"USDT donation from {sender} for {amount} units.")
+    # Logic to process the donation goes here
+
+# Main function to simulate transaction processing
+async def main():
+    # Simulate fetching transaction hashes (normally you'd get them from your system)
+    tx_hashes = ["tx1", "tx2", "tx3", "tx4", "tx5"]  # Replace with actual transaction hashes
+    await process_transactions_concurrently(tx_hashes)
+
+if __name__ == "__main__":
+    asyncio.run(main())
 
 def process_transaction(sender, recipient, amount):
     # Berechnung der Gebühr
     fee = calculate_fee(amount)
     amount_after_fee = amount - fee
+    def process_transaction(sender, recipient, amount):
+    """
+    Diese Funktion verarbeitet eine Transaktion, indem sie eine Gebühr berechnet
+    und den Betrag nach Abzug der Gebühr anpasst.
+
+    Parameters:
+    sender (str): Adresse des Absenders der Transaktion
+    recipient (str): Adresse des Empfängers der Transaktion
+    amount (float): Betrag der Transaktion vor Abzug der Gebühr
+    """
+    # Berechnung der Gebühr
+    fee = calculate_fee(amount)
     
+    # Betrag nach Abzug der Gebühr
+    amount_after_fee = amount - fee
+
+    print(f"Transaktion von {sender} zu {recipient}")
+    print(f"Ursprünglicher Betrag: {amount}")
+    print(f"Gebühr: {fee}")
+    print(f"Betrag nach Gebühr: {amount_after_fee}")
+    
+    # Logik zur weiteren Verarbeitung der Transaktion mit dem angepassten Betrag
+    # Zum Beispiel Überweisung an den Empfänger oder andere Aktionen
+    return amount_after_fee
+
+def calculate_fee(amount):
+    """
+    Diese Funktion berechnet die Gebühr auf Basis eines festen Prozentsatzes.
+    
+    Parameters:
+    amount (float): Der ursprüngliche Transaktionsbetrag
+    
+    Returns:
+    float: Die berechnete Gebühr
+    """
+    # Angenommener fester Prozentsatz für die Gebühr (z. B. 1%)
+    fee_percentage = 0.01
+    return amount * fee_percentage
+
     # Durchführung der Haupttransaktion
     send_tokens(sender, recipient, amount_after_fee)
     
