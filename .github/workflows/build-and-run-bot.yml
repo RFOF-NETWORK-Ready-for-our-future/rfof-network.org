@@ -1,4 +1,4 @@
-name: @RFOF_BOT
+name: [ main ]
 
 on:
   push:
