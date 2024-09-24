@@ -1,4 +1,6 @@
-name: @RFOF_BOT
+name: [main]
+name: [ton-core]
+name: [ton-wallet]
 
 # Token und Chat-ID aus Umgebungsvariablen lesen
 TOKEN = os.getenv("6774549752:AAFx5D-reu3Pu-qkmKLh2aNxumv4faZtRN0")
