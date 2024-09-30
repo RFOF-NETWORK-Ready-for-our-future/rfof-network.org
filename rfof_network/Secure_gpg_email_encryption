@@ -1,0 +1,39 @@
+import gnupg
+import os
+from dotenv import load_dotenv
+
+# .env-Datei laden (sicherstellen, dass die .env Datei im Projekt vorhanden ist)
+load_dotenv()
+
+# E-Mails aus den Umgebungsvariablen laden
+sender_email = os.getenv('SENDER_EMAIL')
+recipient_email = os.getenv('RECIPIENT_EMAIL')
+
+# GPG Initialisierung
+gpg = gnupg.GPG()
+
+# Schlüsselpaar erstellen mit sender_email
+input_data = gpg.gen_key_input(name_email=sender_email)
+key = gpg.gen_key(input_data)
+print(f"Öffentlicher Schlüssel: {key.fingerprint}")
+
+# Beispiel: Verschlüsseln von Daten
+def encrypt_data(data, recipient_email):
+    encrypted_data = gpg.encrypt(data, recipients=[recipient_email])
+    return encrypted_data
+
+# Beispiel: Entschlüsseln von Daten
+def decrypt_data(encrypted_data):
+    decrypted_data = gpg.decrypt(encrypted_data.data)
+    return decrypted_data
+
+# Testdaten für Verschlüsselung und Entschlüsselung
+test_data = "Dies sind sensible Daten"
+
+# Verschlüsselung
+encrypted = encrypt_data(test_data, recipient_email)
+print(f"Verschlüsselte Daten: {encrypted}")
+
+# Entschlüsselung
+decrypted = decrypt_data(encrypted)
+print(f"Entschlüsselte Daten: {decrypted}")
