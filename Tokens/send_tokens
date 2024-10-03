@@ -1,0 +1,14 @@
+def send_tokens(sender, recipient, amount):
+    try:
+        message = Message(
+            to=recipient,
+            value=amount,
+            from_addr=sender,
+            abi=abi
+        )
+        
+        # Führe die Transaktion durch
+        transaction = client.send_message(message)
+        logger.info(f"Transaktion erfolgreich: {transaction}")
+    except Exception as e:
+        logger.error(f"Fehler beim Senden der Tokens: {e}")
