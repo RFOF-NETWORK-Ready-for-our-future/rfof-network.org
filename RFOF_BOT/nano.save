@@ -1,209 +1,101 @@
-clude <stdio.h>
-#include <stdlib.h> 
-#include <string.h> 
-#include <curl/curl.h> 
-#define TOKEN 
-# Token und Chat-ID aus Umgebungsvariablen lesen
-TOKEN = os.getenv("6774549752:AAFx5D-reu3Pu-qkmKLh2aNxumv4faZtRN0")
-CHAT_ID = "6386147374"  # Hier die spezifische Chat-ID einfügen
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+#include <unistd.h>  // Für sleep()
+#include <sys/types.h> // Für pid_t
+#include <signal.h> // Für Signalhandling
+#include <fcntl.h> // Für Dateizugriff
+#include <errno.h> // Für Fehlerhandling
+#include <pthread.h> // Für Multithreading
+#include <time.h> // Für Zeitstempel
 
-#"6386147374"
-char *url_encode(const 
-char *str) {
-    CURL *curl = 
-    curl_easy_init(); 
-    char *encoded = NULL; 
+#const char* TOKEN = getenv("TELEGRAM_BOT_TOKEN");
+#const char* CHAT_ID = getenv("TELEGRAM_CHAT_ID");
+
+
+char *url_encode(const char *str) {
+    CURL *curl = curl_easy_init();
+    char *encoded = NULL;
     if (curl) {
-        encoded = 
-        curl_easy_escape(curl, 
-        str, 0); 
+        encoded = curl_easy_escape(curl, str, 0);
         curl_easy_cleanup(curl);
     }
     return encoded;
 }
-void send_message(const 
-char *message) {
-    CURL *curl; CURLcode 
-    res; char url[256]; 
-    snprintf(url, 
-    sizeof(url), 
-    "https://api.telegram.org/bot%s/sendMessage", 
-    TOKEN); char 
-    *encoded_message = 
-    url_encode(message); 
-    if (!encoded_message) 
-    {
-        fprintf(stderr, 
-        "Failed to URL 
-        encode the 
-        message\n"); 
+
+void send_message(const char *message) {
+    CURL *curl;
+    CURLcode res;
+    char url[256];
+    snprintf(url, sizeof(url), "https://api.telegram.org/bot%s/sendMessage", TOKEN);
+    char *encoded_message = url_encode(message);
+    if (!encoded_message) {
+        fprintf(stderr, "Failed to URL encode the message\n");
         return;
     }
-    char 
-    post_fields[512]; 
-    snprintf(post_fields, 
-    sizeof(post_fields), 
-    "chat_id=%s&text=%s", 
-    CHAT_ID, 
-    encoded_message); 
-    curl_global_init(CURL_GLOBAL_ALL); 
-    curl = 
-    curl_easy_init(); if 
-    (curl) {
-        curl_easy_setopt(curl, 
-        CURLOPT_URL, 
-        url); 
-        curl_easy_setopt(curl, 
-        CURLOPT_POSTFIELDS, 
-        post_fields); res 
-        = 
-        curl_easy_perform(curl); 
-        if (res != 
-        CURLE_OK) {
-            fprintf(stderr, 
-            "curl_easy_perform() 
-            failed: 
-            %s\n", 
-            curl_easy_strerror(res));
+
+    char post_fields[512];
+    snprintf(post_fields, sizeof(post_fields), "chat_id=%s&text=%s", CHAT_ID, encoded_message);
+    curl_global_init(CURL_GLOBAL_ALL);
+    curl = curl_easy_init();
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_fields);
+        res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
         } else {
-            printf("Message 
-            sent 
-            successfully!\n");
+            printf("Message sent successfully!\n");
         }
         curl_easy_cleanup(curl);
     } else {
-        fprintf(stderr, 
-        "Failed to 
-        initialize 
-        curl\n");
+        fprintf(stderr, "Failed to initialize curl\n");
     }
-    curl_global_cleanup(); 
+    curl_global_cleanup();
     curl_free(encoded_message);
 }
-void 
-process_command(const 
-char *command) {
-    if (strcmp(command, 
-    "/start") == 0) {
-        send_message("Willkommen 
-        beim RFOF Bot! 
-        Hier sind die 
-        verfügbaren 
-        Befehle: /info, 
-        /price, /buy, 
-        /sell, 
-        /transactions, 
-        /security, 
-        /support, /news, 
-        /community, 
-        /empty");
-    } else if 
-    } (strcmp(command, 
-    } "/info") == 0) {
-        send_message("Hi, 
-        I'm RFOF Bot. 
-        Welcome to the 
-        RFOF TOKEN BOT. 
-        The $RFOF Token 
-        is an innovative 
-        token based on 
-        the TON 
-        Blockchain. Our 
-        goal is to 
-        provide financial 
-        support and 
-        advocacy for 
-        various causes in 
-        a straightforward 
-        manner.");
-    } else if 
-    } (strcmp(command, 
-    } "/price") == 0) {
-        send_message("Der 
-        aktuelle Preis 
-        des RFOF Tokens 
-        beträgt 
-        0,000000");
-    } else if 
-    } (strcmp(command, 
-    } "/buy") == 0) {
-        send_message("Anleitungen 
-        zum Kauf von RFOF 
-        Tokens folgen 
-        bald.");
-    } else if 
-    } (strcmp(command, 
-    } "/sell") == 0) {
-        send_message("Anleitungen 
-        zum Verkauf von 
-        RFOF Tokens 
-        folgen bald.");
-    } else if 
-    } (strcmp(command, 
-    } "/transactions") == 
-    } 0) {
-        send_message("Informationen 
-        zu Transaktionen 
-        werden bald 
-        bereitgestellt.");
-    } else if 
-    } (strcmp(command, 
-    } "/security") == 0) 
-    } {
-        send_message("Sicherheitstipps 
-        und Hinweise 
-        werden bald 
-        bereitgestellt.");
-    } else if 
-    } (strcmp(command, 
-    } "/support") == 0) {
-        send_message("Kontaktiere 
-        den Support für 
-        weitere Hilfe: 
-        @SupportHandle");
-    } else if 
-    } (strcmp(command, 
-    } "/news") == 0) {
-        send_message("Neuigkeiten 
-        und Updates zum 
-        RFOF Token werden 
-        bald 
-        bereitgestellt.");
-    } else if 
-    } (strcmp(command, 
-    } "/community") == 0) 
-    } {
-        send_message("Treten 
-        Sie unserer 
-        Community bei und 
-        diskutieren Sie 
-        mit anderen: 
-        https://t.me/RFOFCommunity");
-    } else if 
-    } (strcmp(command, 
-    } "/empty") == 0) {
-        send_message("Liste 
-        wurde geleert.");
+
+void process_command(const char *command) {
+    if (strcmp(command, "/start") == 0) {
+        send_message("Willkommen beim RFOF Bot! Hier sind die verfügbaren Befehle: /info, /price, /buy, /sell, /transactions, /security, /support, /news, /community, /empty");
+    } else if (strcmp(command, "/info") == 0) {
+        send_message("Hi, ich bin der RFOF Bot. Willkommen beim RFOF TOKEN BOT. Der $RFOF Token ist ein innovativer Token basierend auf der TON Blockchain. Unser Ziel ist es, finanzielle Unterstützung und Advocacy für verschiedene Anliegen auf einfache Weise bereitzustellen.");
+    } else if (strcmp(command, "/price") == 0) {
+        send_message("Der aktuelle Preis des RFOF Tokens beträgt 0,000000");
+    } else if (strcmp(command, "/buy") == 0) {
+        send_message("Anleitungen zum Kauf von RFOF Tokens folgen bald.");
+    } else if (strcmp(command, "/sell") == 0) {
+        send_message("Anleitungen zum Verkauf von RFOF Tokens folgen bald.");
+    } else if (strcmp(command, "/transactions") == 0) {
+        send_message("Informationen zu Transaktionen werden bald bereitgestellt.");
+    } else if (strcmp(command, "/security") == 0) {
+        send_message("Sicherheitstipps und Hinweise werden bald bereitgestellt.");
+    } else if (strcmp(command, "/support") == 0) {
+        send_message("Kontaktiere den Support für weitere Hilfe: @SupportHandle");
+    } else if (strcmp(command, "/news") == 0) {
+        send_message("Neuigkeiten und Updates zum RFOF Token werden bald bereitgestellt.");
+    } else if (strcmp(command, "/community") == 0) {
+        send_message("Treten Sie unserer Community bei und diskutieren Sie mit anderen: https://t.me/RFOFCommunity");
+    } else if (strcmp(command, "/empty") == 0) {
+        send_message("Liste wurde geleert.");
     } else {
-        send_message("Unbekannter 
-        Befehl.");
+        send_message("Unbekannter Befehl.");
     }
 }
-int main() { 
-    process_command("/start"); 
-    process_command("/info"); 
-    process_command("/price"); 
-    process_command("/buy"); 
-    process_command("/sell"); 
-    process_command("/transactions"); 
-    process_command("/security"); 
-    process_command("/support"); 
-    process_command("/news"); 
-    process_command("/community"); 
-    process_command("/empty"); 
-    process_command("/unknown"); 
+
+int main() {
+    process_command("/start");
+    process_command("/info");
+    process_command("/price");
+    process_command("/buy");
+    process_command("/sell");
+    process_command("/transactions");
+    process_command("/security");
+    process_command("/support");
+    process_command("/news");
+    process_command("/community");
+    process_command("/empty");
+    process_command("/unknown");
     return 0;
 }
-gcc -o telegram_bot 
-telegram_bot.c -lcurl 
-./telegram_bot
