@@ -15,7 +15,7 @@ Welcome to the BUBATZ Token Bot! This is a Telegram bot designed to provide info
 
 # Token und Chat-ID aus Umgebungsvariablen lesen
 TOKEN = os.getenv("TELEGRAM_BOT_API_KEY")
-CHAT_ID = "6386147374"  # Hier die spezifische Chat-ID einfügen
+CHAT_ID = ("TELEGRAM_CHAT_ID")  # Hier die spezifische Chat-ID einfügen
 
 
 ## Table of Contents
