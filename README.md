@@ -50,6 +50,7 @@ To set up the bot locally, follow these steps:
 4. **Install the dependencies**:
     ```bash
     pip install -r requirements.txt
+    pip install cryptography
     ```
 
 5. **Run the bot**:
