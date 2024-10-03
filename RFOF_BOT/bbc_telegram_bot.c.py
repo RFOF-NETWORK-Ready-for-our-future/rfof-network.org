@@ -1,49 +1,57 @@
-from cryptography.fernet import Fernet
+import os
+import requests
 
-# Generiert einen Schlüssel zur Verschlüsselung
-def generiere_schluessel():
-    schluessel = Fernet.generate_key()
-    with open("secret.key", "wb") as schluessel_datei:
-        schluessel_datei.write(schluessel)
+# Token und Chat-ID aus Umgebungsvariablen lesen
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
-# Lädt den zuvor generierten Schlüssel
-def lade_schluessel():
-    return open("secret.key", "rb").read()
+def url_encode(message):
+    """URL-codiert eine Nachricht."""
+    return requests.utils.quote(message)
 
-# Verschlüsselt die Datei
-def verschluessel_datei(dateipfad):
-    schluessel = lade_schluessel()
-    fernet = Fernet(schluessel)
-    
-    with open(dateipfad, "rb") as datei:
-        original_inhalt = datei.read()
+def send_message(message):
+    """Sendet eine Nachricht an den Telegram-Chat."""
+    encoded_message = url_encode(message)
+    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+    payload = {
+        'chat_id': CHAT_ID,
+        'text': encoded_message
+    }
 
-    # Verschlüsselt den Inhalt
-    verschluesselter_inhalt = fernet.encrypt(original_inhalt)
-    
-    with open(dateipfad, "wb") as verschluesselte_datei:
-        verschluesselte_datei.write(verschluesselter_inhalt)
-    
-    print(f"Datei '{dateipfad}' erfolgreich verschlüsselt.")
+    response = requests.post(url, data=payload)
+    if response.status_code == 200:
+        print("Nachricht erfolgreich gesendet!")
+    else:
+        print(f"Fehler beim Senden der Nachricht: {response.text}")
 
-# Entschlüsselt die Datei
-def entschluessel_datei(dateipfad):
-    schluessel = lade_schluessel()
-    fernet = Fernet(schluessel)
+def process_command(command):
+    """Verarbeitet Befehle des Benutzers."""
+    if command == "/start":
+        send_message("Willkommen beim RFOF Bot! Hier sind die verfügbaren Befehle: /info, /price, /buy, /sell, /transactions, /security, /support, /news, /community, /empty")
+    elif command == "/info":
+        send_message("Hi, ich bin der RFOF Bot. Willkommen beim RFOF TOKEN BOT. Der $RFOF Token ist ein innovativer Token basierend auf der TON Blockchain.")
+    elif command == "/price":
+        send_message("Der aktuelle Preis des RFOF Tokens beträgt 0,000000.")
+    elif command == "/buy":
+        send_message("Anleitungen zum Kauf von RFOF Tokens folgen bald.")
+    elif command == "/sell":
+        send_message("Anleitungen zum Verkauf von RFOF Tokens folgen bald.")
+    elif command == "/transactions":
+        send_message("Informationen zu Transaktionen werden bald bereitgestellt.")
+    elif command == "/security":
+        send_message("Sicherheitstipps und Hinweise werden bald bereitgestellt.")
+    elif command == "/support":
+        send_message("Kontaktiere den Support für weitere Hilfe: @SupportHandle")
+    elif command == "/news":
+        send_message("Neuigkeiten und Updates zum RFOF Token werden bald bereitgestellt.")
+    elif command == "/community":
+        send_message("Treten Sie unserer Community bei und diskutieren Sie mit anderen: https://t.me/RFOFCommunity")
+    elif command == "/empty":
+        send_message("Liste wurde geleert.")
+    else:
+        send_message("Unbekannter Befehl.")
 
-    with open(dateipfad, "rb") als verschluesselte_datei:
-        verschluesselter_inhalt = verschluesselte_datei.read()
-
-    # Entschlüsselt den Inhalt
-    entschluesselter_inhalt = fernet.decrypt(verschluesselter_inhalt)
-
-    with open(dateipfad, "wb") als entschluesselte_datei:
-        entschluesselte_datei.write(entschluesselter_inhalt)
-
-    print(f"Datei '{dateipfad}' erfolgreich entschlüsselt.")
-
-
-# Beispielverwendung
-generiere_schluessel()  # Schlüssel einmalig generieren und speichern
-verschluessel_datei("bbc_telegram_bot.c.py")  # Datei verschlüsseln
-# entschluessel_datei("bbc_telegram_bot.py")  # Datei entschlüsseln, wenn nötig
+if __name__ == "__main__":
+    commands = ["/start", "/info", "/price", "/buy", "/sell", "/transactions", "/security", "/support", "/news", "/community", "/empty", "/unknown"]
+    for cmd in commands:
+        process_command(cmd)
