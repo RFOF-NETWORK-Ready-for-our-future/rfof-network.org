@@ -1,5 +1,3 @@
-
-
 PycURL -- A Python Interface To The cURL library
 
 
