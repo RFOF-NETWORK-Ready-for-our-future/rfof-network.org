@@ -2,7 +2,6 @@ RFOF≈Matrix is Loading and work for the Network from our Thousend X Layer and 
 rfof-network.org (BLOCKCHAIN) is starting now
 Hier ist der vollständige HTML-Code, den du bereitgestellt hast, mit einem einfachen JavaScript-Skript für die Token-Suche und Wallet-Verbindung. Ich habe den Code strukturiert und die Funktionalität hinzugefügt, sodass du keine zusätzliche Arbeit mehr leisten musst.
 
-```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -10,35 +9,54 @@ Hier ist der vollständige HTML-Code, den du bereitgestellt hast, mit einem einf
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Wallet-Verbindungen für RFOF Blockchain und andere Netzwerke">
     <title>Wallet | RFOF Network</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Euer Stylesheet -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ton-client-web/dist/ton-client-web.min.js"></script>
-    <script src="https://unpkg.com/@metamask/detect-provider"></script>
+    <link rel="stylesheet" href="styles.min.css"> <!-- Minified Stylesheet -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/ton-client-web/dist/ton-client-web.min.js" async></script>
+    <script src="https://unpkg.com/@metamask/detect-provider" async></script>
     <style>
-        /* Inline CSS für die Buttons */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1e1e2f;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom right, #1e1e2f, #0e0e1e);
             color: white;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            background: rgba(30, 30, 47, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
         }
 
         .container {
+            flex: 1;
             width: 80%;
             margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px; /* Platz für Header */
         }
 
         h1, h2 {
             text-align: center;
+            margin: 20px 0;
         }
 
-        .wallet-section, .token-search-section {
+        .wallet-section, .token-search-section, .dynamic-info-section {
             margin: 20px 0;
             padding: 20px;
-            border: 1px solid #444;
             border-radius: 10px;
             background-color: #282c36;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .wallet-select, .input-token {
@@ -49,10 +67,14 @@ Hier ist der vollständige HTML-Code, den du bereitgestellt hast, mit einem einf
             border-radius: 5px;
             background-color: #333;
             color: white;
+            transition: background-color 0.3s;
+        }
+
+        .wallet-select:hover, .input-token:hover {
+            background-color: #444;
         }
 
         .btn-primary {
-            display: inline-block;
             padding: 12px 20px;
             margin: 10px 0;
             border: none;
@@ -61,7 +83,6 @@ Hier ist der vollständige HTML-Code, den du bereitgestellt hast, mit einem einf
             color: #fff;
             font-size: 16px;
             cursor: pointer;
-            position: relative;
             transition: all 0.3s ease;
             box-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
         }
@@ -71,11 +92,30 @@ Hier ist der vollständige HTML-Code, den du bereitgestellt hast, mit einem einf
             box-shadow: 0 0 20px rgba(0, 191, 255, 1);
         }
 
+        .dynamic-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .info-card {
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            flex: 1 1 30%; /* Flex-grow, Flex-shrink, Flex-basis */
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .info-card:hover {
+            transform: scale(1.05);
+        }
+
         footer {
             text-align: center;
             padding: 20px;
             background-color: #282c36;
-            position: relative;
         }
     </style>
 </head>
@@ -132,6 +172,26 @@ Hier ist der vollständige HTML-Code, den du bereitgestellt hast, mit einem einf
             <p id="token-info"></p>
         </div>
     </section>
+
+    <section class="dynamic-info-section">
+        <div class="container">
+            <h2>Aktuelle Informationen</h2>
+            <div class="dynamic-info">
+                <div class="info-card">
+                    <h3>Token Preise</h3>
+                    <p id="token-prices">Lade Preise...</p>
+                </div>
+                <div class="info-card">
+                    <h3>Letzte Transaktionen</h3>
+                    <p id="last-transactions">Lade Transaktionen...</p>
+                </div>
+                <div class="info-card">
+                    <h3>Netzwerkstatus</h3>
+                    <p id="network-status">Überprüfe den Status...</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
 <footer>
@@ -144,86 +204,5 @@ Hier ist der vollständige HTML-Code, den du bereitgestellt hast, mit einem einf
     async function connectWallet() {
         const network = document.getElementById('network-select').value;
 
-        if (network === 'ethereum' || network === 'bsc' || network === 'polygon') {
-            const provider = await detectEthereumProvider();
-            if (provider) {
-                const web3 = new Web3(provider);
-                await provider.request({ method: 'eth_requestAccounts' });
-                const accounts = await web3.eth.getAccounts();
-                const balance = await web3.eth.getBalance(accounts[0]);
-
-                document.getElementById('wallet-address').textContent = accounts[0];
-                document.getElementById('wallet-balance').textContent = web3.utils.fromWei(balance, 'ether') + ' ETH';
-                document.getElementById('wallet-network').textContent = network;
-                document.getElementById('wallet-status').textContent = 'Wallet verbunden';
-                document.getElementById('wallet-info').style.display = 'block';
-            } else {
-                alert('MetaMask oder ein Web3-fähiger Browser ist erforderlich, um mit diesem Netzwerk zu verbinden.');
-            }
-        } else if (network === 'ton') {
-            // TON Wallet-Verbindung
-            const client = await TonClient.create({ network: { server_address: "main.ton.dev" } });
-            const account = await client.crypto.generate_random_sign_keys();
-            document.getElementById('wallet-address').textContent = account.public;
-            document.getElementById('wallet-status').textContent = 'TON Wallet verbunden';
-            document.getElementById('wallet-info').style.display = 'block';
-        } else if (network === 'rfof') {
-            // RFOF Wallet (noch in Entwicklung)
-            alert('Die RFOF Wallet-Verbindung ist derzeit in Entwicklung und wird bald verfügbar sein.');
-        }
-    }
-
-    async function searchToken() {
-        const tokenAddress = document.getElementById('token-address').value;
-        const network = document.getElementById('network-select').value;
-
-        // Beispiel für die Token-Suche (hier musst du deine API oder Logik implementieren)
-        if (network === 'ethereum' || network === 'bsc' || network === 'polygon') {
-            const provider = await detectEthereumProvider();
-            if (provider) {
-                const web3 = new Web3(provider);
-                const tokenContract = new web3.eth.Contract(ERC20_ABI, tokenAddress);
-                const name = await tokenContract.methods.name().call();
-                const symbol = await tokenContract.methods.symbol().call();
-                const totalSupply = await tokenContract.methods.totalSupply().call();
-
-                document.getElementById('token-info').textContent = `Name: ${name}, Symbol: ${symbol}, Gesamtversorgung: ${web3.utils.fromWei(totalSupply, 'ether')}`;
-            } else {
-                alert('Bitte MetaMask oder einen Web3-fähigen Browser verwenden.');
-            }
-        } else {
-            document.getElementById('token-info').textContent = 'Token-Suche ist nur für Ethereum, BSC und Polygon verfügbar.';
-        }
-    }
-
-    const ERC20_ABI = [
-        // Hier die ERC20-ABI hinzufügen
-        // Einfache Version für die Funktionen: name, symbol, totalSupply
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "name",
-            "outputs": [{ "name": "", "type": "string" }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "symbol",
-            "outputs": [{ "name": "", "type": "string" }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "totalSupply",
-            "outputs": [{ "name": "", "type": "uint256" }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        }
-   
+        try {
+            if (
