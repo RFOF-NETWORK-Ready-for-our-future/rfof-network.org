@@ -1,11 +1,10 @@
 #RFOF-NETWORK
 BLOCKCHAIN rfof-network.org Matrix-VALLIDATOR-Workflow
-    PR     |      AI
+    PR     |    ∞AI
           \_/
-          $PRAI = RFOF¤
+$PRAI = RFOF¤
 |
-|———
-
+|——— RFOF_Spider-net‰
 
 
 BUBATZ-TOKEN-QUELL-CODE---S/
@@ -118,6 +117,7 @@ This repository includes a GitHub Actions workflow located in `.github/workflows
 2. **Set up Python**: Installs the specified Python version.
 3. **Install dependencies**: Installs the required Python packages from `requirements.txt`.
 4. **Run the bot**: Executes the Python script for the Telegram bot.
+5. **npm-install-@RFOF-NETWORK**
 
 ## Security Policies
 
