@@ -61,7 +61,8 @@ To set up the bot locally, follow these steps:
     pip install -r requirements.txt
     pip install cryptography
     ```
-**npm-install-@RFOF-NETWORK**
+**npm-install-@RFOF-BOT**
+
 5. **Run the bot**:
     ```bash
     python path/to/your_script.py  # Replace with the actual path to your Python script
