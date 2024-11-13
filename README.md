@@ -1,3 +1,11 @@
+rfof-network.org 
+
+funC 
+
+Rust, MATLAB, Scale, R, SQL, Elixir, Dart, Julia, Assembly, VHDL/Verilog, COBOL, Shell-Skripte (Bash), Ada, Prolog, Haskell, TensorFlow, PyTorch, Keras, Scikit-Learn, C#, F#, ActionScript,
+Smalltalk, APL (A Programming, Nim, OCaml,
+X10, SAS, Forth, Simulink, Modellica, Q#, TCL, PureScript, Crystal, Elm, AWK, Turing, Kotline/Nativ
+
 #RFOF-NETWORK
 BLOCKCHAIN rfof-network.org Matrix-VALLIDATOR-Workflow
     PR     |    ∞AI
