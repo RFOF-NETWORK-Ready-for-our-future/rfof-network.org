@@ -1,3 +1,4 @@
+# npm-install-@RFOF-NETWORK
 rfof-network.org/
 
 funC 
@@ -6,7 +7,9 @@ Rust, MATLAB, Scale, R, SQL, Elixir, Dart, Julia, Assembly, VHDL/Verilog, COBOL,
 Smalltalk, APL (A Programming, Nim, OCaml,
 X10, SAS, Forth, Simulink, Modellica, Q#, TCL, PureScript, Crystal, Elm, AWK, Turing, Kotline/Nativ
 
-#RFOF-NETWORK
+# @RFOF-NETWORK
+
+### Project structur
 BLOCKCHAIN rfof-network.org Matrix-VALLIDATOR-Workflow
     PR     |    ∞AI
           \_/
@@ -14,7 +17,8 @@ $PRAI = RFOF¤
 |
 |——— RFOF_Spider-net‰
 
-
+|_____ Abillity to $Abillity with $PRAI
+= PRAI
 BUBATZ-TOKEN-QUELL-CODE---S/
 │
 ├── .github/
