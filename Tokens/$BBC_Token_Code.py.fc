@@ -1,82 +1,131 @@
+Natürlich! Hier ist eine grundlegende Projektstruktur für dein GitHub-Repository für BUBATZ COIN official (CSC-DCV):
+
+1. Erstelle das Repository:
+
+Gehe zu GitHub und erstelle ein neues Repository namens BubatzCoin.
+
+
+2. Projektstruktur:
+BubatzCoin/
+├── contracts/
+│   └── BubatzCoin\.sol
+├── migrations/
+│   └── 1_deploy_contracts\.js
+├── test/
+│   └── BubatzCoin\.test\.js
+├── \.gitignore
+├── README\.md
+├── truffle-config\.js
+└── package\.json
+
+
+3. Dateien und Inhalte:
+
+
+contracts/BubatzCoin.sol:
 // SPDX-License-Identifier: MIT
 pragma solidity ^0\.8\.0;
 
 contract BubatzCoin {
-    string public name = "BUBATZ COIN official (CSC/DCV)";
-    string public symbol = "BBC";
-    uint8 public decimals = 9;
-    uint256 public totalSupply;
-    address public owner;
-    bool public mintable = true;
-    uint256 public difficulty = 10**32; // Beispielwert für die Schwierigkeit
+    // Dein Smart Contract Code hier
+}
 
-    mapping(address => uint256) public balanceOf;
-    mapping(address => mapping(address => uint256)) public allowance;
 
-    event Transfer(address indexed from, address indexed to, uint256 value);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
-    event Mint(address indexed to, uint256 value);
-    event Burn(address indexed from, uint256 value);
-    event Mined(address indexed miner, uint256 reward);
 
-    modifier onlyOwner() {
-        require(msg\.sender == owner, "Only the owner can perform this action");
-        _;
-    }
+migrations/1_deploy_contracts.js:
+const BubatzCoin = artifacts\.require("BubatzCoin");
 
-    constructor(uint256 _initialSupply) {
-        owner = msg\.sender;
-        totalSupply = _initialSupply * 10 ** uint256(decimals);
-        balanceOf[msg\.sender] = totalSupply;
-    }
+module\.exports = function(deployer) {
+    deployer\.deploy(BubatzCoin, 1000000); // Beispiel Initial Supply
+};
 
-    function transfer(address _to, uint256 _value) public returns (bool success) {
-        require(balanceOf[msg\.sender] >= _value, "Insufficient balance");
-        balanceOf[msg\.sender] -= _value;
-        balanceOf[_to] += _value;
-        emit Transfer(msg\.sender, _to, _value);
-        return true;
-    }
 
-    function approve(address _spender, uint256 _value) public returns (bool success) {
-        allowance[msg\.sender][_spender] = _value;
-        emit Approval(msg\.sender, _spender, _value);
-        return true;
-    }
 
-    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
-        require(_value <= balanceOf[_from], "Insufficient balance");
-        require(_value <= allowance[_from][msg\.sender], "Allowance exceeded");
-        balanceOf[_from] -= _value;
-        balanceOf[_to] += _value;
-        allowance[_from][msg\.sender] -= _value;
-        emit Transfer(_from, _to, _value);
-        return true;
-    }
+test/BubatzCoin.test.js:
+const BubatzCoin = artifacts\.require("BubatzCoin");
 
-    function mint(address _to, uint256 _value) public onlyOwner returns (bool success) {
-        require(mintable, "Minting is disabled");
-        totalSupply += _value;
-        balanceOf[_to] += _value;
-        emit Mint(_to, _value);
-        return true;
-    }
+contract("BubatzCoin", accounts => {
+    it("should put 1000000 BubatzCoin in the first account", async () => {
+        const instance = await BubatzCoin\.deployed();
+        const balance = await instance\.balanceOf(accounts[0]);
+        assert\.equal(balance\.valueOf(), 1000000 * 10 ** 9, "1000000 wasn't in the first account");
+    });
+});
 
-    function burn(uint256 _value) public returns (bool success) {
-        require(balanceOf[msg\.sender] >= _value, "Insufficient balance to burn");
-        balanceOf[msg\.sender] -= _value;
-        totalSupply -= _value;
-        emit Burn(msg\.sender, _value);
-        return true;
-    }
 
-    function mine(uint256 nonce) public returns (bool success) {
-        bytes32 hash = keccak256(abi\.encodePacked(nonce, msg\.sender));
-        require(uint256(hash) < difficulty, "Hash does not meet difficulty requirements");
-        uint256 reward = 50 * 10 ** uint256(decimals); // Beispielwert für die Belohnung
-        totalSupply += reward;
-        balanceOf[msg\.sender] += reward;
-        emit Mined(msg\.sender, reward);
-        return true;
+
+.gitignore:
+node_modules/
+build/
+
+
+
+README.md:
+# BUBATZ COIN official (CSC-DCV)
+
+This is the official repository for the BUBATZ COIN (BBC) project\.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes\.
+
+### Prerequisites
+
+- Node\.js
+- Truffle
+- Ganache
+
+### Installing
+
+```bash
+npm install
+truffle compile
+truffle migrate
+truffle test
+
+Deployment
+
+Add additional notes about how to deploy this on a live system.
+
+
+
+
+truffle-config.js:
+module\.exports = {
+    networks: {
+        development: {
+            host: "127\.0\.0\.1",
+            port: 7545,
+            network_id: "*", // Match any network id
+        },
+    },
+    compilers: {
+        solc: {
+            version: "0\.8\.0",
+        },
+    },
+};
+
+
+
+package.json:
+{
+    "name": "bubatzcoin",
+    "version": "1\.0\.0",
+    "description": "BUBATZ COIN official (CSC-DCV)",
+    "main": "truffle-config\.js",
+    "scripts": {
+        "test": "truffle test"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "truffle": "^5\.4\.29",
+        "web3": "^1\.5\.2"
     }
 }
+
+
+
+
+Nachdem du diese Struktur erstellt hast, kannst du die Dateien in dein GitHub-Repository hochladen. Viel Erfolg mit deinem Projekt! Wenn du weitere Fragen hast, stehe ich gerne zur Verfügung.
