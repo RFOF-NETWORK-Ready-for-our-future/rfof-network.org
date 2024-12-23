@@ -1,0 +1,28 @@
+BubatzCoin/
+├── contracts/
+│   ├── BubatzCoin\.sol
+│   ├── RFOFNetworkAPI\.sol
+│   ├── BBC_Training\.sol
+│   ├── BubatzManager\.sol
+│   ├── CTC\.sol
+│   ├── CTC_Training\.sol
+│   ├── BubatzCoinFunc\.fc
+├── migrations/
+│   └── 1_deploy_contracts\.js
+├── test/
+│   ├── BubatzCoin\.test\.js
+│   ├── BBC_Training\.test\.js
+│   ├── CTC_Training\.test\.js
+├── scripts/
+│   └── BubatzManager\.js
+├── \.gitignore
+├── README\.md
+├── truffle-config\.js
+├── package\.json
+└── public/
+    ├── index\.html
+    ├── css/
+    │   └── styles\.css
+    ├── js/
+    │   └── main\.js
+    └── img/
