@@ -1,1 +1,208 @@
 RFOF≈Matrix is Loading and work for the Network from our Thousend X Layer and the 1000X-Layer is created by Rescuer Layer From The RFOF🧠 Network🌐
+rfof-network.org (BLOCKCHAIN) is starting now
+Hier ist der vollständige HTML-Code, den du bereitgestellt hast, mit einem einfachen JavaScript-Skript für die Token-Suche und Wallet-Verbindung. Ich habe den Code strukturiert und die Funktionalität hinzugefügt, sodass du keine zusätzliche Arbeit mehr leisten musst.
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wallet-Verbindungen für RFOF Blockchain und andere Netzwerke">
+    <title>Wallet | RFOF Network</title>
+    <link rel="stylesheet" href="styles.min.css"> <!-- Minified Stylesheet -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/ton-client-web/dist/ton-client-web.min.js" async></script>
+    <script src="https://unpkg.com/@metamask/detect-provider" async></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom right, #1e1e2f, #0e0e1e);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            background: rgba(30, 30, 47, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .container {
+            flex: 1;
+            width: 80%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px; /* Platz für Header */
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .wallet-section, .token-search-section, .dynamic-info-section {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #282c36;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .wallet-select, .input-token {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .wallet-select:hover, .input-token:hover {
+            background-color: #444;
+        }
+
+        .btn-primary {
+            padding: 12px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #00f; /* Neon Blau */
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
+        }
+
+        .btn-primary:hover {
+            background-color: #00bfff; /* Helleres Blau bei Hover */
+            box-shadow: 0 0 20px rgba(0, 191, 255, 1);
+        }
+
+        .dynamic-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .info-card {
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            flex: 1 1 30%; /* Flex-grow, Flex-shrink, Flex-basis */
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .info-card:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #282c36;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Wallet-Verbindung</h1>
+        <nav>
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/profile">Profil & Informationen</a></li>
+                <li><a href="/services">Unsere Dienstleistungen</a></li>
+                <li><a href="/workspace">Projekt-Work-Space</a></li>
+                <li><a href="/faq">FAQ</a></li>
+                <li><a href="/contact">Kontakt</a></li>
+                <li class="active"><a href="/wallet">Wallet</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="wallet-page">
+    <section class="wallet-section">
+        <div class="container">
+            <h2>Verbinde deine Wallet</h2>
+            <p id="wallet-status">Keine Wallet verbunden.</p>
+
+            <div class="wallet-options">
+                <label for="network-select">Netzwerk auswählen:</label>
+                <select id="network-select" class="wallet-select">
+                    <option value="ethereum">Ethereum</option>
+                    <option value="bsc">Binance Smart Chain</option>
+                    <option value="polygon">Polygon</option>
+                    <option value="ton">TON Blockchain</option>
+                    <option value="rfof">RFOF Blockchain</option>
+                </select>
+                <button class="btn-primary" onclick="connectWallet()">Wallet verbinden</button>
+            </div>
+
+            <div id="wallet-info" style="display: none;">
+                <p><strong>Wallet Adresse:</strong> <span id="wallet-address"></span></p>
+                <p><strong>Balance:</strong> <span id="wallet-balance"></span></p>
+                <p><strong>Netzwerk:</strong> <span id="wallet-network"></span></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="token-search-section">
+        <div class="container">
+            <h2>Token Suchen</h2>
+            <input type="text" id="token-address" class="input-token" placeholder="Token Adresse eingeben">
+            <button class="btn-primary" onclick="searchToken()">Token Suchen</button>
+            <p id="token-info"></p>
+        </div>
+    </section>
+
+    <section class="dynamic-info-section">
+        <div class="container">
+            <h2>Aktuelle Informationen</h2>
+            <div class="dynamic-info">
+                <div class="info-card">
+                    <h3>Token Preise</h3>
+                    <p id="token-prices">Lade Preise...</p>
+                </div>
+                <div class="info-card">
+                    <h3>Letzte Transaktionen</h3>
+                    <p id="last-transactions">Lade Transaktionen...</p>
+                </div>
+                <div class="info-card">
+                    <h3>Netzwerkstatus</h3>
+                    <p id="network-status">Überprüfe den Status...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2024 RFOF Network. Alle Rechte vorbehalten.</p>
+    </div>
+</footer>
+
+<script>
+    async function connectWallet() {
+        const network = document.getElementById('network-select').value;
+
+        try {
+            if (

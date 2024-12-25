@@ -1,0 +1,48 @@
+const WORKCHAIN = 0;
+
+const REQUIRED_TON_RESERVE = 10000000; // Beispielwert für deinen Coin
+const REQUIRED_FEES_MINT = 30000000; // Beispielwert für deinen Coin
+const REQUIRED_MIN_LIQUIDITY = 1000; // Beispielwert für deinen Coin
+const REQUIRED_MIN_COLLECT_FEES = 1000000; // Beispielwert für deinen Coin
+const MAX_COINS = 1329227995784915872903807060280344575; // 2^120 - 1, technische Begrenzung
+const PROVIDE_ADD_GAS_CONSUMPTION = 10000000;
+const FEE_DIVIDER = 10000;
+const MIN_FEE = 0; // 0%
+const MAX_FEE = 100; // 1%
+
+const HOLE_ADDRESS = "0:d831c65fe8e01db6f84999af3cef01ddc87fdda308d85a888e7fdcf2e4c9b9fa"; // Adresse für BBC
+slice addr_none() asm "<b b{00} s, b> <s PUSHSLICE";
+const URI_BASE = "https://lp\.bubatz\.fi/0:"; // Angepasste Basis-URL für BBC
+const URI_END = "\.json";
+
+// Zusätzliche Informationen für deinen Coin
+const MAX_SUPPLY = 99999999999999800000; // Max\. Supply für BBC
+const MINTABLE = true; // Gibt an, ob der Coin mintable ist
+const SYMBOL = "BBC"; // Symbol für deinen Coin
+const DECIMALS = 9; // Dezimalstellen für deinen Coin
+
+// Funktionen und Logik des BUBATZ LP Codes
+function calculateFee(amount) {
+    return Math\.max(MIN_FEE, Math\.min(MAX_FEE, amount / FEE_DIVIDER));
+}
+
+function mintCoins(amount) {
+    if (amount > MAX_SUPPLY) {
+        throw new Error("Amount exceeds max supply");
+    }
+    // Logik zum Minting von Coins
+}
+
+function provideLiquidity(amount) {
+    if (amount < REQUIRED_MIN_LIQUIDITY) {
+        throw new Error("Amount below required minimum liquidity");
+    }
+    // Logik zum Bereitstellen von Liquidität
+}
+
+function collectFees(amount) {
+    if (amount < REQUIRED_MIN_COLLECT_FEES) {
+        throw new Error("Amount below required minimum collect fees");
+    }
+    // Logik zum Einsammeln von Gebühren
+}

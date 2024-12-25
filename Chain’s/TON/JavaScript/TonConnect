@@ -1,0 +1,12 @@
+// TON Integration Beispiel
+import { TonConnect } from "@tonconnect/sdk";
+
+const tonConnect = new TonConnect();
+const button = document.getElementById('connect-ton-wallet');
+
+button.addEventListener('click', async () => {
+    await tonConnect.connectWallet();
+    const walletAddress = tonConnect.getConnectedWallet();
+    document.getElementById('wallet-address').textContent = walletAddress;
+    // Weitere Interaktionen wie Abruf der Balance, etc.
+});
