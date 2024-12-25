@@ -7,7 +7,7 @@ ton-client-cpp
 ton-sdk
 tonapi
 python-telegram-bot
-requests==2.25.1      # For HTTP requests
+requests==2.32.2      # For HTTP requests
 flask==2.0.1          # Web framework for building your bot's web interface
 numpy==1.22.0         # For numerical computations
 web3==5.24.0          # Library for interacting with Ethereum and other blockchains
