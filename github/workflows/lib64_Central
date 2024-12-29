@@ -1,3 +1,4 @@
+@RFOF-NETWORK = 42 print("RFOFNetworkAPI")
 bitcoin.org/en/how-to-mine-bitcoin
 Uniswap V2
 Uniswap V3
