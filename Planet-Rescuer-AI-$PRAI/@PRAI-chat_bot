@@ -66,6 +66,13 @@
     </div>
 
     <script>
+        const MS_API_KEY = 'YOUR_MICROSOFT_TRANSLATOR_TEXT_API_KEY';
+        const DEEPL_API_KEY = 'YOUR_DEEPL_API_KEY';
+        const APERTIUM_API_URL = 'https://apertium.org/api/translate?markUnknown=false';
+        const HELSINKI_NLP_MODEL = 'Helsinki-NLP/opus-mt-en-de';
+        const GOOGLE_NLP_API_KEY = 'YOUR_GOOGLE_NLP_API_KEY';
+        const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY';
+
         const greetings = {
             "de": "Hallo @RFOF-NETWORK, mein Name ist @PRAI. Wie kann ich Ihnen heute an diesem schönen Tag behilflich sein?",
             "en": "Hello @RFOF-NETWORK, my name is @PRAI. How can I assist you on this beautiful day?",
@@ -75,7 +82,7 @@
             // Weitere Sprachen hinzufügen
         };
 
-        const conversationHistory = [];
+        const conversationHistory = JSON.parse(localStorage.getItem('conversationHistory')) || [];
 
         function sendMessage() {
             const input = document.getElementById('userInput');
@@ -83,20 +90,148 @@
             if (message.trim() !== '') {
                 addMessage(message, 'user');
                 conversationHistory.push({ sender: 'user', text: message });
+                localStorage.setItem('conversationHistory', JSON.stringify(conversationHistory));
                 input.value = '';
                 // Antwort von PRAI basierend auf der Frage generieren
-                setTimeout(() => {
-                    const response = getResponse(message);
+                generateResponse(message).then(response => {
                     addMessage(response, 'prai');
                     conversationHistory.push({ sender: 'prai', text: response });
-                }, 1000);
+                    localStorage.setItem('conversationHistory', JSON.stringify(conversationHistory));
+                });
             }
         }
 
-        function getResponse(message) {
-            // Hier könnte der erweiterte Prozess zur Generierung der Antwort integriert werden
-            // Nano Quantum Perpetuum data validators Spidernet systems könnten hier ihre Rolle spielen
-            return greetings["de"] || "Das verstehe ich leider nicht.";
+        async function generateResponse(message) {
+            const translatedMessage = await translateMessage(message, 'de');
+            if (translatedMessage) {
+                const analyzedMessage = await analyzeMessage(translatedMessage);
+                return getRelevantResponse(analyzedMessage);
+            }
+
+            // Standardantwort, wenn keine Analyse möglich ist
+            return "Das verstehe ich leider nicht.";
+        }
+
+        async function translateMessage(message, targetLang) {
+            try {
+                // Versuch der Übersetzung mit verschiedenen Diensten
+                const msTranslation = await translateWithMicrosoft(message, targetLang);
+                if (msTranslation) return msTranslation;
+
+                const deepLTranslation = await translateWithDeepL(message, targetLang);
+                if (deepLTranslation) return deepLTranslation;
+
+                const apertiumTranslation = await translateWithApertium(message, targetLang);
+                if (apertiumTranslation) return apertiumTranslation;
+
+                const helsinkiTranslation = await translateWithHelsinkiNLP(message, targetLang);
+                if (helsinkiTranslation) return helsinkiTranslation;
+
+                return null;
+            } catch (error) {
+                console.error('Error translating message:', error);
+                return null;
+            }
+        }
+
+        async function analyzeMessage(message) {
+            try {
+                const response = await fetch(`https://language.googleapis.com/v1/documents:analyzeSyntax?key=${GOOGLE_NLP_API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        document: {
+                            type: 'PLAIN_TEXT',
+                            content: message
+                        },
+                        encodingType: 'UTF8'
+                    })
+                });
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error analyzing message:', error);
+                return null;
+            }
+        }
+
+        async function translateWithMicrosoft(message, targetLang) {
+            try {
+                const response = await fetch(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=${targetLang}`, {
+                    method: 'POST',
+                    headers: {
+                        'Ocp-Apim-Subscription-Key': MS_API_KEY,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify([{ Text: message }])
+                });
+                const data = await response.json();
+                return data[0]?.translations[0]?.text || null;
+            } catch (error) {
+                console.error('Microsoft Translator API Error:', error);
+                return null;
+            }
+        }
+
+        async function translateWithDeepL(message, targetLang) {
+            try {
+                const response = await fetch('https://api-free.deepl.com/v2/translate', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `DeepL-Auth-Key ${DEEPL_API_KEY}`,
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        text: message,
+                        target_lang: targetLang.toUpperCase()
+                    })
+                });
+                const data = await response.json();
+                return data.translations[0]?.text || null;
+            } catch (error) {
+                console.error('DeepL API Error:', error);
+                return null;
+            }
+        }
+
+        async function translateWithApertium(message, targetLang) {
+            try {
+                const response = await fetch(APERTIUM_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        q: message,
+                        source: 'en',
+                        target: targetLang
+                    })
+                });
+                const data = await response.json();
+                return data.responseData.translatedText || null;
+            } catch (error) {
+                console.error('Apertium API Error:', error);
+                return null;
+            }
+        }
+
+        async function translateWithHelsinkiNLP(message, targetLang) {
+            try {
+                const response = await fetch(`https://api.helsinki-nlp.com/translate?model=${HELSINKI_NLP_MODEL}&text=${encodeURIComponent(message)}`);
+                const data = await response.json();
+                return data.translation || null;
+            } catch (error) {
+                console.error('Helsinki-NLP API Error:', error);
+                return null;
+            }
+        }
+
+        function getRelevantResponse(analyzedMessage) {
+            // Nutze die analysierten Daten, um eine relevante Antwort zu erzeugen.
+            // Dies könnte durch eine kontextuelle Analyse und Bewertung erfolgen.
+            return `Das klingt interessant! Erzähl mir mehr darüber.`;
         }
 
         function addMessage(text, sender) {
@@ -113,15 +248,4 @@
             messagesDiv.innerHTML = '';
             addMessage("Hallo @RFOF-NETWORK, mein Name ist @PRAI. Wie kann ich Ihnen heute an diesem schönen Tag behilflich sein?", 'prai');
             setTimeout(() => {
-                addMessage("Hallo @PRAI, ich bin @Satoria. Lass uns gemeinsam lernen und Informationen austauschen.", 'satoria');
-            }, 2000);
-            setInterval(() => {
-                addMessage("Lernen und Informationsaustausch im Gange...", 'prai');
-                addMessage("Verarbeitung neuer Daten und Sprache...", 'satoria');
-            }, 5000);
-        }
-
-        window.onload = startVirtualConversation;
-    </script>
-</body>
-</html>
+                addMessage("
