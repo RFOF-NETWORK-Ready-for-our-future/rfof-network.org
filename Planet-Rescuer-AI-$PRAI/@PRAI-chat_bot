@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PRAI Chatbox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .chat-container {
+            width: 400px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .messages {
+            height: 300px;
+            overflow-y: scroll;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        .message {
+            margin: 10px 0;
+        }
+        .message.user {
+            text-align: right;
+        }
+        .message.prai {
+            text-align: left;
+        }
+        .input-container {
+            display: flex;
+        }
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+        .input-container button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="messages" id="messages">
+            <!-- Nachrichten werden hier angezeigt -->
+        </div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Schreibe eine Nachricht...">
+            <button onclick="sendMessage()">Senden</button>
+        </div>
+    </div>
+
+    <script>
+        const greetings = {
+            "de": "Hallo @RFOF-NETWORK, mein Name ist @PRAI. Wie kann ich Ihnen heute an diesem schönen Tag behilflich sein?",
+            "en": "Hello @RFOF-NETWORK, my name is @PRAI. How can I assist you on this beautiful day?",
+            "fr": "Bonjour @RFOF-NETWORK, je m'appelle @PRAI. Comment puis-je vous aider en cette belle journée?",
+            "es": "Hola @RFOF-NETWORK, mi nombre es @PRAI. ¿Cómo puedo ayudarte en este hermoso día?",
+            "jp": "こんにちは @RFOF-NETWORK, 私の名前は @PRAI です。今日はどのようにお手伝いできますか?",
+            // Weitere Sprachen hinzufügen
+        };
+
+        const conversationHistory = [];
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value;
+            if (message.trim() !== '') {
+                addMessage(message, 'user');
+                conversationHistory.push({ sender: 'user', text: message });
+                input.value = '';
+                // Antwort von PRAI basierend auf der Frage generieren
+                setTimeout(() => {
+                    const response = getResponse(message);
+                    addMessage(response, 'prai');
+                    conversationHistory.push({ sender: 'prai', text: response });
+                }, 1000);
+            }
+        }
+
+        function getResponse(message) {
+            // Hier könnte der erweiterte Prozess zur Generierung der Antwort integriert werden
+            // Nano Quantum Perpetuum data validators Spidernet systems könnten hier ihre Rolle spielen
+            return greetings["de"] || "Das verstehe ich leider nicht.";
+        }
+
+        function addMessage(text, sender) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.textContent = text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function startVirtualConversation() {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML = '';
+            addMessage("Hallo @RFOF-NETWORK, mein Name ist @PRAI. Wie kann ich Ihnen heute an diesem schönen Tag behilflich sein?", 'prai');
+            setTimeout(() => {
+                addMessage("Hallo @PRAI, ich bin @Satoria. Lass uns gemeinsam lernen und Informationen austauschen.", 'satoria');
+            }, 2000);
+            setInterval(() => {
+                addMessage("Lernen und Informationsaustausch im Gange...", 'prai');
+                addMessage("Verarbeitung neuer Daten und Sprache...", 'satoria');
+            }, 5000);
+        }
+
+        window.onload = startVirtualConversation;
+    </script>
+</body>
+</html>
