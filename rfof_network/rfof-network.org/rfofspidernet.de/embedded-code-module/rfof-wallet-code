@@ -1,0 +1,250 @@
+<style>
+    body {
+        text-align: center;
+        overflow: hidden; /* Verhindert das Zoomen */
+        background-color: #f0f0f0;
+        color: #333;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+    .wallet-profile {
+        text-align: center;
+    }
+    .balance {
+        font-size: 24px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .balance div {
+        display: flex;
+        align-items: center;
+    }
+    .profile-settings {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        cursor: pointer;
+    }
+    #settings-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        z-index: 1000;
+        text-align: left;
+    }
+    #settings-popup h2 {
+        margin-top: 0;
+    }
+    #settings-popup button {
+        margin-top: 10px;
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #settings-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    #coin-button, #jwbtc-button, #streak-button, #ton-button {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        margin-left: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 18px;
+    }
+    #coin-button {
+        background-color: green;
+    }
+    #jwbtc-button {
+        background-color: orange;
+    }
+    #streak-button {
+        background-color: lightblue;
+    }
+    #ton-button {
+        background-color: skyblue;
+    }
+    .flash {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px 10px;
+        background-color: red;
+        color: white;
+        font-size: 20px;
+        border-radius: 5px;
+        display: none;
+    }
+    #profile-pic {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin-top: 20px;
+        border: 2px solid #333;
+    }
+    .V-Token-Balance {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        font-style: italic;
+        color: darkblue;
+    }
+    #loading {
+        display: none;
+        font-size: 24px;
+        margin-top: 20px;
+        color: #00ff00;
+        background-color: #000000;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .block {
+        margin-top: 20px;
+        padding: 10px;
+        border: 2px solid #00ff00;
+        border-radius: 5px;
+        text-align: left;
+        font-size: 14px;
+        display: none;
+        background-color: #000000;
+        color: #00ff00;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    .hidden-option {
+        display: none;
+        color: #ff0000;
+    }
+    .notification {
+        font-size: 16px;
+        color: green;
+        margin-top: 10px;
+    }
+</style>
+
+<h1><b>WALLET-PROFIL</b></h1>
+<div class="wallet-profile">
+    <img src="profilbild.jpg" alt="Profilbild" id="profile-pic" onclick="document.getElementById('file-input').click()">
+    <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="uploadProfilePic(event)">
+    <h3 id="username-display"></h3>
+    <div class="profile-settings" onclick="openSettings()">⚙️</div>
+</div>
+
+<div class="V-Token-Balance">V-Token-Balance:</div>
+<div id="balance" class="balance">
+    <div>jWBTC Balance: 0,00<button id="jwbtc-button" disabled>J</button></div>
+    <div>Bubatz Coin Balance: <span id="bubatz-balance">0</span><button id="coin-button" onclick="mineBubatzCoin()">B</button></div>
+    <div>Streak Balance: 0<button id="streak-button" disabled>S</button></div>
+    <div>Ton Balance: 0<button id="ton-button" disabled>T</button></div>
+</div>
+
+<div id="settings-overlay" onclick="closeSettings()"></div>
+<div id="settings-popup">
+    <h2>Einstellungen</h2>
+    <input type="text" id="new-username" placeholder="Neuer Benutzername">
+    <input type="password" id="new-password" placeholder="Neues Passwort">
+    <input type="text" id="new-wallet-address" placeholder="Neue Wallet-Adresse">
+    <button onclick="saveSettings()">Speichern</button>
+    <button onclick="closeSettings()">Schließen</button>
+</div>
+
+<div class="flash" id="flash">1+</div>
+<div class="notification" id="notification"></div>
+
+<div id="loading">⏳ Block wird gemined...</div>
+<div class="block" id="mined-block">
+    <pre>
+42 @RFOF-NETWORK & @PRAI Hallo
+Initialisierung des Mining-Prozesses...
+Virtuelle Maschine gestartet...
+Daten werden analysiert...
+Kryptografische Hash-Funktion angewendet...
+Block validiert und in die Blockchain aufgenommen!
+:..$BBC mined 100
+:...Block mined 1
+    </pre>
+    <div class="hidden-option" id="mining-details">
+        Mining-Daten:
+        Benutzer: anonym
+        Zeit: 00:00:00
+        Hash: xxxxxxxxxxxx
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/tonweb@0.0.39/dist/tonweb.min.js"></script>
+
+<script>
+    const TonWeb = window.TonWeb;
+    const tonweb = new TonWeb();
+
+    const contractAddress = '0:d831c65fe8e01db6f84999af3cef01ddc87fdda308d85a888e7fdcf2e4c9b9fa';
+    const accountAddress = 'DEINE_ACCOUNT_ADRESSE'; // Deine Account-Adresse hier einfügen
+
+    // Initialisieren und Benutzerdaten laden
+    function initialize() {
+        const storedPic = localStorage.getItem('profile-pic');
+        if (storedPic) {
+            document.getElementById('profile-pic').src = storedPic;
+        }
+        
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('username-display').innerText = username;
+        } else {
+            document.getElementById('username-display').innerText = 'Benutzername';
+        }
+
+        // Initiale Balance laden
+        updateBalance();
+    }
+
+    document.addEventListener('wheel', function(e) {
+        if (e.ctrlKey) {
+            e.preventDefault();
+        }
+    });
+
+    function updateBalance() {
+        const balance = localStorage.getItem('bubatz-balance') || '0';
+        document.getElementById('bubatz-balance').textContent = balance;
+    }
+
+    function showNotification(message) {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.style.display = 'block';
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 3000);
+    }
+
+    function mineBubatzCoin() {
+        const balance = parseInt(localStorage.getItem('bubatz-balance') || '0
