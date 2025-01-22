@@ -79,11 +79,17 @@ jobs:
     - name: Test Websockets
       run: python websocket_test.py
 
-    - name: Validate Blockchain Transactions
-      run: python validate_transactions.py
+    - name: Validate Blockchain Transactions (RFOF)
+      run: python validate_rfof_transactions.py
 
-    - name: Validate Data Storage Logic
-      run: python validate_data_storage.py
+    - name: Validate Blockchain Transactions (PRAI)
+      run: python validate_prai_transactions.py
+
+    - name: Validate Data Storage Logic (RFOF)
+      run: python validate_rfof_data_storage.py
+
+    - name: Validate Data Storage Logic (PRAI)
+      run: python validate_prai_data_storage.py
 
   deploy:
     strategy:
@@ -101,10 +107,15 @@ jobs:
     - name: Notify deployment
       run: curl -X POST -H 'Content-type: application/json' --data '{"text":"Deployment successful"}' ${{ secrets.SLACK_WEBHOOK_URL }}
         
-    - name: Post deployment check
+    - name: Post deployment check (RFOF)
       run: |
         curl -X GET "https://rfofspidernet.de/api/status" -H "Authorization: Bearer ${{ secrets.API_KEY }}"
         curl -X GET "https://rfofspidernet.de/api/checkpoints" -H "Authorization: Bearer ${{ secrets.API_KEY }}"
+
+    - name: Post deployment check (PRAI)
+      run: |
+        curl -X GET "https://praiapi.de/api/status" -H "Authorization: Bearer ${{ secrets.API_KEY }}"
+        curl -X GET "https://praiapi.de/api/checkpoints" -H "Authorization: Bearer ${{ secrets.API_KEY }}"
 
     - name: Activate PRAI
       run: python activate_prai.py
@@ -117,4 +128,8 @@ jobs:
     runs-on: ${{ matrix.server }}
 
     steps:
-    - name: Test integration with Bitcoin/ETH/EGLD
+    - name: Test integration with RFOF and TON blockchain coins
+      run: python test_integration_rfof_ton.py
+
+    - name: Reintegrate previously included chains and currencies
+      run: python reintegrate_chains_currencies.py
