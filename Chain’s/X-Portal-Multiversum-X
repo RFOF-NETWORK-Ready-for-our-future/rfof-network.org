@@ -1,8 +1,0 @@
-async function connectXPortal() {
-    const response = await fetch('https://api.multiversumx.com/v1/wallet-connect');
-    const walletData = await response.json();
-    // Wallet-Daten und NFTs auslesen
-    document.getElementById('xportal-wallet').textContent = walletData.address;
-    document.getElementById('nft-list').innerHTML = walletData.nfts.map(nft => `<li>${nft.name}</li>`).join('');
-}
-connectXPortal();
