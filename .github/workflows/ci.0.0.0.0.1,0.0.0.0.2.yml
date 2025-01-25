@@ -1,0 +1,44 @@
+name: Run Blockchain Model
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Debug environment
+      run: |
+        echo "Python version: $(python --version)"
+        echo "Pip version: $(pip --version)"
+        pip list
+
+    - name: Run Blockchain Script
+      run: |
+        python generate_wallet.py
+
+    - name: Post run
+      if: failure()
+      run: echo "Workflow failed at step: ${STEP}"
+
+env:
+  STEP: 'Run Blockchain Script'
