@@ -1,0 +1,101 @@
+;; FunC code for RFOF Blockchain Initialization
+;; Include Tact and Tolk libraries
+include <tact>
+include <tolk>
+
+;; Define Main RFOF Blockchain Structure
+struct RFOFBlockchain {
+    mainnet: bool;
+    testnet: bool;
+    coin_master_address: slice;
+    founder_address: slice;
+    adnl_address: slice;
+    validators: cell;
+    nano_data: cell;
+    storage_mapper: cell;
+    vault: cell;
+    initialized: bool;
+}
+
+;; Initialize RFOF Blockchain
+() int init_rf_of_blockchain(slice coin_master_address, slice founder_address, slice adnl_address, bool mainnet, bool testnet) {
+    ;; Initialize the main structure
+    var rf_of_blockchain = RFOFBlockchain{
+        mainnet: mainnet,
+        testnet: testnet,
+        coin_master_address: coin_master_address,
+        founder_address: founder_address,
+        adnl_address: adnl_address,
+        validators: new_cell(),
+        nano_data: new_cell(),
+        storage_mapper: new_cell(),
+        vault: new_cell(),
+        initialized: false
+    };
+
+    ;; Setup network info for mainnet and testnet
+    if (mainnet) {
+        rf_of_blockchain.mainnet := true;
+        rf_of_blockchain.adnl_address := adnl_address;
+    } else if (testnet) {
+        rf_of_blockchain.testnet := true;
+        rf_of_blockchain.adnl_address := adnl_address;
+    }
+
+    ;; Initialize essential features
+    rf_of_blockchain.validators := initialize_validators();
+    rf_of_blockchain.nano_data := initialize_nano_data();
+    rf_of_blockchain.storage_mapper := initialize_storage_mapper();
+    rf_of_blockchain.vault := initialize_vault();
+
+    ;; Mark as initialized
+    rf_of_blockchain.initialized := true;
+
+    ;; Return the initialization status
+    return 1;
+}
+
+;; Function to initialize validators
+() cell initialize_validators() {
+    var validators = new_cell();
+    ;; Add validator initialization code here
+    return validators;
+}
+
+;; Function to initialize nano data
+() cell initialize_nano_data() {
+    var nano_data = new_cell();
+    ;; Add nano data initialization code here
+    return nano_data;
+}
+
+;; Function to initialize storage mapper
+() cell initialize_storage_mapper() {
+    var storage_mapper = new_cell();
+    ;; Add storage mapper initialization code here
+    return storage_mapper;
+}
+
+;; Function to initialize vault
+() cell initialize_vault() {
+    var vault = new_cell();
+    ;; Add vault initialization code here
+    return vault;
+}
+
+;; Main Function
+() int main() {
+    ;; Initialize RFOF Blockchain with Coin Master, Founder addresses, and ADNL address
+    init_rf_of_blockchain(
+        "0:e4fb51aa7386080b6d8b4c00192f1a26864ca9f95e76074c9a787826937b7d2e",
+        "Generated_Founder_Address",
+        "AD77FB007A10429920E4AE2BEAF2844E8A76074E25B46AAEBDD5AC57373B26B0",
+        false,  ;; mainnet
+        true    ;; testnet
+    );
+
+    ;; Additional setup and configurations if needed
+
+    ;; Return success status
+    return 0;
+}
