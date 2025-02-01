@@ -1,0 +1,53 @@
+;; FunC code for Lite-Client Smart Contract
+include <tact>
+include <tolk>
+
+struct LiteClient {
+    current_epoch: uint64;
+    validators: cell;
+}
+
+;; Internal message for syncing keyblocks
+new_key_block#11a78ffe query_id:uint64 block:^Cell signatures:^Cell = InternalMsgBody;
+check_block#8eaa9d76 query_id:uint64 block:^Cell signatures:^Cell = InternalMsgBody;
+
+;; Response message formats
+ok#ff8ff4e1 query_id:uint64 block_hash:uint256 = InternalMsgBody;
+correct#ce02b807 query_id:uint64 block_hash:uint256 = InternalMsgBody;
+
+;; Function to check validity of new key block
+() int check_new_key_block(uint64 query_id, cell block, cell signatures) {
+    ;; Validate the block signatures and epoch
+    ;; Placeholder implementation
+    ;; If valid, update validators and current epoch
+    if (validate_signatures(block, signatures)) {
+        current_epoch := block.get_epoch();
+        validators := block.get_validators();
+        return ok{query_id, block.hash()};
+    } else {
+        return reject();
+    }
+}
+
+;; Function to check validity of a block
+() int check_block_validity(uint64 query_id, cell block, cell signatures) {
+    ;; Validate the block signatures
+    ;; Placeholder implementation
+    if (validate_signatures(block, signatures)) {
+        return correct{query_id, block.hash()};
+    } else {
+        return reject();
+    }
+}
+
+;; Helper function to validate signatures
+() bool validate_signatures(cell block, cell signatures) {
+    ;; Placeholder implementation
+    return true;
+}
+
+;; Main Function
+() int main() {
+    ;; Implementation of the main function
+    return 0;
+}
