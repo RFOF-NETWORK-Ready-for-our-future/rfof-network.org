@@ -133,4 +133,3 @@ jobs:
 
     - name: Reintegrate previously included chains and currencies
       run: python reintegrate_chains_currencies.py
-
