@@ -1,0 +1,36 @@
+;; FunC code for Transaction-Checker Smart Contract
+include <tact>
+include <tolk>
+
+struct TransactionChecker {
+    current_block: cell;
+}
+
+;; Internal message for checking transaction
+check_transaction#91d555f7 transaction:^Cell proof:^Cell current_block:^Cell = InternalMsgBody;
+
+;; Response message format
+transaction_checked#756adff1 transaction:^Cell = InternalMsgBody;
+
+;; Function to check transaction validity
+() int check_transaction(uint64 query_id, cell transaction, cell proof, cell current_block) {
+    ;; Validate the proof and transaction
+    ;; Placeholder implementation
+    if (validate_transaction(transaction, proof, current_block)) {
+        return transaction_checked{query_id, transaction};
+    } else {
+        return reject();
+    }
+}
+
+;; Helper function to validate transaction
+() bool validate_transaction(cell transaction, cell proof, cell current_block) {
+    ;; Placeholder implementation
+    return true;
+}
+
+;; Main Function
+() int main() {
+    ;; Implementation of the main function
+    return 0;
+}
