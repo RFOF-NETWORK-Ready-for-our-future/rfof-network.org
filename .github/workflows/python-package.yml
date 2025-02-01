@@ -1,6 +1,3 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Python package
 
 on:
@@ -30,11 +27,4 @@ jobs:
         python -m pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pytest
+      run:[_{{{CITATION{{{_1{](https://github.com/MicrosoftDocs/azure-docs.de-de/tree/50ddafcbd8ea557c6b29d5cc0f6ba12c5e607c6c/articles%2Fazure-functions%2Ffunctions-how-to-github-actions.md)[_{{{CITATION{{{_2{](https://github.com/brianyaucy/AzurePentestBeginner/tree/18bcfd110d484546eee658a05621d37e6b8c0078/l01-labreport.md)[_{{{CITATION{{{_3{](https://github.com/iai-group/styleguide/tree/146ae418bf9998c34bd49e0bb7b3222024dfe26b/github%2FActions.md)[_{{{CITATION{{{_4{](https://github.com/Pedraozao/pyhton/tree/163d352afc8669458ad77a127c88b72e1110f37f/test.py)[_{{{CITATION{{{_5{](https://github.com/ben-heil/ben-heil.github.io/tree/f84feecf73771c8040abadfad5f419b761e60fee/_posts%2F2020-08-24-conda-actions.md)[_{{{CITATION{{{_6{](https://github.com/dzmimo3/dzfb/tree/ccd825eb836e36dbb9948cb159bba6e51dde6b13/hakgxhuyf.py)[_{{{CITATION{{{_7{](https://github.com/Faiem10/gumantic-gunda-faiem/tree/f3cfd20c2536ae9cee9bb845d59be4b9986239fb/.github%2Fworkflows%2Frumantic%20gunda%20faiem.py)[_{{{CITATION{{{_8{](https://github.com/ko602/Fb-Hacker/tree/4c369d38a958e2371219e7c9149d81abf64681f5/.github%2Fworkflows%2Fpython2%20Fb-Hacker.py)
