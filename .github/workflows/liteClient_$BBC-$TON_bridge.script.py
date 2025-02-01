@@ -1,6 +1,13 @@
+"""
+Module for liteClient_$BBC-$TON_bridge.script
+"""
+
 import requests
 
 def generate_new_key_block_message(query_id, block, signatures):
+    """
+    Generates a new key block message.
+    """
     message = {
         "query_id": query_id,
         "block": block,
@@ -9,6 +16,9 @@ def generate_new_key_block_message(query_id, block, signatures):
     return message
 
 def generate_check_transaction_message(query_id, transaction, proof, current_block):
+    """
+    Generates a check transaction message.
+    """
     message = {
         "query_id": query_id,
         "transaction": transaction,
@@ -18,23 +28,39 @@ def generate_check_transaction_message(query_id, transaction, proof, current_blo
     return message
 
 def send_message(message, api_endpoint):
+    """
+    Sends a message to the specified API endpoint.
+    """
     response = requests.post(api_endpoint, json=message)
     return response.json()
 
-# Beispiel für das Abrufen von Daten vom Lite-Server und Erstellen von Nachrichten
-api_endpoint = "https://testnet.ton.org/api"
-query_id = 1
-block = "block data"
-signatures = "signatures data"
-transaction = "transaction data"
-proof = "proof data"
-current_block = "current block data"
+API_ENDPOINT_TESTNET = "https://testnet.ton.org/api"
+API_ENDPOINT_FASTNET = "https://fastnet.ton.org/api"
+QUERY_ID = 1
+BLOCK = "block data"
+SIGNATURES = "signatures data"
+TRANSACTION = "transaction data"
+PROOF = "proof data"
+CURRENT_BLOCK = "current block data"
 
-# Erstellen und Senden von Nachrichten
-new_key_block_message = generate_new_key_block_message(query_id, block, signatures)
-response = send_message(new_key_block_message, api_endpoint)
-print(response)
+# Testnet
+NEW_KEY_BLOCK_MESSAGE_TESTNET = generate_new_key_block_message(QUERY_ID, BLOCK, SIGNATURES)
+RESPONSE_TESTNET = send_message(NEW_KEY_BLOCK_MESSAGE_TESTNET, API_ENDPOINT_TESTNET)
+print("Testnet Response:", RESPONSE_TESTNET)
 
-check_transaction_message = generate_check_transaction_message(query_id, transaction, proof, current_block)
-response = send_message(check_transaction_message, api_endpoint)
-print(response)
+CHECK_TRANSACTION_MESSAGE_TESTNET = generate_check_transaction_message(
+    QUERY_ID, TRANSACTION, PROOF, CURRENT_BLOCK
+)
+RESPONSE_TESTNET = send_message(CHECK_TRANSACTION_MESSAGE_TESTNET, API_ENDPOINT_TESTNET)
+print("Testnet Response:", RESPONSE_TESTNET)
+
+# Fastnet
+NEW_KEY_BLOCK_MESSAGE_FASTNET = generate_new_key_block_message(QUERY_ID, BLOCK, SIGNATURES)
+RESPONSE_FASTNET = send_message(NEW_KEY_BLOCK_MESSAGE_FASTNET, API_ENDPOINT_FASTNET)
+print("Fastnet Response:", RESPONSE_FASTNET)
+
+CHECK_TRANSACTION_MESSAGE_FASTNET = generate_check_transaction_message(
+    QUERY_ID, TRANSACTION, PROOF, CURRENT_BLOCK
+)
+RESPONSE_FASTNET = send_message(CHECK_TRANSACTION_MESSAGE_FASTNET, API_ENDPOINT_FASTNET)
+print("Fastnet Response:", RESPONSE_FASTNET)
