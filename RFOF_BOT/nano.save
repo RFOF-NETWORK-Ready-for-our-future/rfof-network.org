@@ -5,7 +5,7 @@ clude <stdio.h>
 #define TOKEN 
 #"DEIN_BOT_TOKEN_HIER" 
 #define CHAT_ID 
-#"DEINE_CHAT_ID_HIER"
+#"DEINE_CHAT_ID
 char *url_encode(const 
 char *str) {
     CURL *curl = 
@@ -14,7 +14,7 @@ char *str) {
     if (curl) {
         encoded = 
         curl_easy_escape(curl, 
-        str, 0); 
+        str, == 0); 
         curl_easy_cleanup(curl);
     }
     return encoded;
@@ -27,7 +27,7 @@ char *message) {
     sizeof(url), 
     "https://api.telegram.org/bot%s/sendMessage", 
     TOKEN); char 
-    *encoded_message = 
+    *encoded_message
     url_encode(message); 
     if (!encoded_message) 
     {
@@ -97,7 +97,7 @@ char *command) {
         /empty");
     } else if 
     } (strcmp(command, 
-    } "/info") == 0) {
+     "/info") == 0) {
         send_message("Hi, 
         I'm RFOF Bot. 
         Welcome to the 
@@ -115,62 +115,62 @@ char *command) {
         a straightforward 
         manner.");
     } else if 
-    } (strcmp(command, 
-    } "/price") == 0) {
+     (strcmp(command,
+     "/price") == 0) {
         send_message("Der 
         aktuelle Preis 
         des RFOF Tokens 
         beträgt 
         0,000000");
     } else if 
-    } (strcmp(command, 
-    } "/buy") == 0) {
+     (strcmp(command, 
+     "/buy") == 0) {
         send_message("Anleitungen 
         zum Kauf von RFOF 
         Tokens folgen 
         bald.");
     } else if 
-    } (strcmp(command, 
-    } "/sell") == 0) {
+     (strcmp(command, 
+     "/sell") == 0) {
         send_message("Anleitungen 
         zum Verkauf von 
         RFOF Tokens 
         folgen bald.");
     } else if 
-    } (strcmp(command, 
-    } "/transactions") == 
-    } 0) {
+     (strcmp(command, 
+     "/transactions") == 
+     0) {
         send_message("Informationen 
         zu Transaktionen 
         werden bald 
         bereitgestellt.");
     } else if 
-    } (strcmp(command, 
-    } "/security") == 0) 
-    } {
+     (strcmp(command, 
+     "/security") == 0) 
+     {
         send_message("Sicherheitstipps 
         und Hinweise 
         werden bald 
         bereitgestellt.");
     } else if 
-    } (strcmp(command, 
-    } "/support") == 0) {
+     (s trcmp(command, 
+     /support") == 0) {
         send_message("Kontaktiere 
         den Support für 
         weitere Hilfe: 
         @SupportHandle");
     } else if 
-    } (strcmp(command, 
-    } "/news") == 0) {
+     (strcmp(command, 
+     "/news") == 0) {
         send_message("Neuigkeiten 
         und Updates zum 
         RFOF Token werden 
         bald 
         bereitgestellt.");
     } else if 
-    } (strcmp(command, 
-    } "/community") == 0) 
-    } {
+     (strcmp(command, 
+     "/community") == 0) 
+     {
         send_message("Treten 
         Sie unserer 
         Community bei und 
@@ -178,15 +178,15 @@ char *command) {
         mit anderen: 
         https://t.me/RFOFCommunity");
     } else if 
-    } (strcmp(command, 
-    } "/empty") == 0) {
+     (strcmp(command, 
+     "/empty") == 0) {
         send_message("Liste 
         wurde geleert.");
     } else {
         send_message("Unbekannter 
         Befehl.");
     }
-}
+
 int main() { 
     process_command("/start"); 
     process_command("/info"); 

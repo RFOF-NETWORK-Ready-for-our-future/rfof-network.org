@@ -1,22 +1,28 @@
-Sicherheitsrichtlinie
-Unterstützte Versionen
-Verwenden Sie diesen Abschnitt, um andere darüber zu informieren, für welche Versionen Ihres Projekts derzeit Sicherheitsupdates bereitgestellt werden.
+# Security Policy
 
-Ausführung	Unterstützt
-5.1.x	✅
-5.0.x	❌
-4.0.x	✅
-< 4,0	❌
-Eine Sicherheitslücke melden
-In diesem Abschnitt können Sie anderen mitteilen, wie sie eine Sicherheitslücke melden können.
+## Supported Versions
 
-Sagen Sie ihnen, wohin sie sich wenden sollen, wie oft sie mit einem Update zu einer gemeldeten Sicherheitslücke rechnen können, was sie erwartet, wenn die Sicherheitslücke akzeptiert oder abgelehnt wird usw.
+This section provides information about the versions of the project that are currently supported with security updates.
 
-Wenn Sie eine Schwachstelle in diesem Projekt entdecken, befolgen Sie bitte diese Schritte:
+| Version | Supported          |
+| ------- | ------------------ |
+| 5.1.x   | ✅ Yes              |
+| 5.0.x   | ❌ No               |
+| 4.0.x   | ✅ Yes              |
+| < 4.0   | ❌ No               |
 
-Kontakt : Senden Sie eine E-Mail mit Einzelheiten zur Sicherheitslücke an [ rfof236286@gmail.com ].
-Bestätigung : Sie erhalten innerhalb von 48 Stunden eine Bestätigung Ihres Berichts.
-Bewertung : Unser Team bewertet die Schwachstelle und ermittelt ihre Auswirkungen.
-Update : Sie erhalten Updates zum Fortschritt der Fehlerbehebung. Unser Ziel ist es, innerhalb von 7 Tagen nach der Meldung eine Lösung bereitzustellen.
-Lösung : Sobald die Sicherheitslücke geschlossen ist, werden Sie informiert und das Update wird bereitgestellt.
-Vielen Dank, dass Sie uns dabei helfen, die Sicherheit unseres Projekts zu gewährleisten. README
+## Reporting a Vulnerability
+
+If you discover a vulnerability in this project, please follow these steps:
+
+1. **Contact**: Send an email to [rfof236286@gmail.com](mailto:rfof236286@gmail.com) with details about the vulnerability.
+2. **Acknowledgment**: You will receive an acknowledgment of your report within 48 hours.
+3. **Assessment**: Our team will assess the vulnerability and determine its impact.
+4. **Update**: You will receive updates on the progress of the fix. Our goal is to provide a solution within 7 days of the report.
+5. **Resolution**: Once the vulnerability is resolved, you will be informed, and the update will be rolled out.
+
+Thank you for helping us keep our project secure.
+
+## License
+
+This project is licensed under the MIT License.

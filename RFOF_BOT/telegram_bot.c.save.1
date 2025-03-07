@@ -3,16 +3,16 @@
 #include <string.h> 
 #include <curl/curl.h> 
 #define TOKEN 
-#"DEIN_BOT_TOKEN_HIER" 
+#6774549752:AAFx5D-reu3Pu-qkmKLh2aNxumv4faZtRN0
 #define CHAT_ID 
-#"DEINE_CHAT_ID_HIER"
+#6386147374
 char *url_encode(const 
 char *str) {
-    CURL *curl = 
+    CURL *curl  
     curl_easy_init(); 
-    char *encoded = NULL; 
+    char *encoded; 
     if (curl) {
-        encoded = 
+        encoded 
         curl_easy_escape(curl, 
         str, 0); 
         curl_easy_cleanup(curl);
@@ -27,7 +27,7 @@ char *message) {
     sizeof(url), 
     "https://api.telegram.org/bot%s/sendMessage", 
     TOKEN); char 
-    *encoded_message = 
+    *encoded_message 
     url_encode(message); 
     if (!encoded_message) 
     {
@@ -42,7 +42,7 @@ char *message) {
     snprintf(post_fields, 
     sizeof(post_fields), 
     "chat_id=%s&text=%s", 
-    CHAT_ID, 
+    6386147374, 
     encoded_message); 
     curl_global_init(CURL_GLOBAL_ALL); 
     curl = 
@@ -56,7 +56,7 @@ char *message) {
         post_fields); res 
         = 
         curl_easy_perform(curl); 
-        if (res != 
+        if (res !
         CURLE_OK) {
             fprintf(stderr, 
             "curl_easy_perform() 
@@ -97,7 +97,7 @@ char *command) {
         /empty");
     } else if 
     } (strcmp(command, 
-    } "/info") == 0) {
+     "/info") == 0) {
         send_message("Hi, 
         I'm RFOF Bot. 
         Welcome to the 
@@ -115,23 +115,23 @@ char *command) {
         a straightforward 
         manner.");
     } else if 
-    } (strcmp(command, 
-    } "/price") == 0) {
+     (strcmp(command, 
+     "/price") == 0) {
         send_message("Der 
         aktuelle Preis 
         des RFOF Tokens 
         beträgt 
         0,000000");
     } else if 
-    } (strcmp(command, 
-    } "/buy") == 0) {
+     (strcmp(command, 
+     "/buy") == 0) {
         send_message("Anleitungen 
         zum Kauf von RFOF 
         Tokens folgen 
         bald.");
     } else if 
-    } (strcmp(command, 
-    } "/sell") == 0) {
+     (strcmp(command, 
+     "/sell") == 0) {
         send_message("Anleitungen 
         zum Verkauf von 
         RFOF Tokens 
