@@ -228,3 +228,4 @@ For more details, see the specific terms provided by the licensor.
 ```
 
 Ich habe den `info`-Code-Snippet im Abschnitt `Usage` hinzugefügt, um den Lesern zu zeigen, wie sie die Bot-Funktion verwenden können.
+1+1=1 #PRAI\n
