@@ -258,3 +258,4 @@ For more details, see the full GPL text at [GNU GPL](https://www.gnu.org/license
 # Proprietary License for Commercial Use
 
 This Proprietary License allows for the use of digital products
+ 
