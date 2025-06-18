@@ -1,0 +1,109 @@
+/* General body and container styles are mostly handled inline in index.html for this project */
+
+/* This file can contain very general, overriding or additional styles if needed */
+
+/* Ensure basic responsiveness for images */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Prevents extra space below images */
+}
+
+/* Basic styling for the 'Improve this page' link */
+.improve-page-container {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.95em;
+    color: #a0aec0;
+}
+
+.improve-page-link {
+    color: #4299e1;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.improve-page-link:hover {
+    text-decoration: underline;
+    color: #63b3ed;
+}
+
+/* Global Dropdown (Hamburger Menu) Styles - reused from previous projects */
+.hamburger-icon {
+    display: none; /* Hidden by default on desktop */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    z-index: 1001; /* Ensure it's above other content */
+}
+
+.hamburger-icon .bar {
+    width: 100%;
+    height: 3px;
+    background-color: white; /* Or your preferred color */
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Mobile Nav Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .hamburger-icon {
+        display: flex; /* Show hamburger on mobile */
+        margin-left: auto; /* Push it to the right on mobile */
+    }
+
+    .nav-links {
+        display: none; /* Hide nav links by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px; /* Adjust based on your header height */
+        left: 0;
+        background-color: #2d3748; /* Same as header background */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        padding: 1rem 0;
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        display: flex; /* Show nav links when active */
+    }
+
+    .nav-links li {
+        text-align: center;
+        margin: 0;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 0.8rem 1rem;
+        color: #e2e8f0;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        background-color: #4a5568;
+        color: #4299e1;
+    }
+
+    /* Adjust the global dropdown for mobile */
+    .global-dropdown {
+        position: static; /* Allows it to flow within the mobile menu */
+        width: 100%; /* Take full width in mobile menu */
+    }
+
+    .global-dropdown .nav-links {
+        padding-left: 0; /* No extra padding for global links */
+    }
+}
