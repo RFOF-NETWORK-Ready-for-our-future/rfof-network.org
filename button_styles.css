@@ -1,0 +1,117 @@
+/* button_styles.css */
+
+/* Basis-Styling für Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    border: none;
+}
+
+/* Primärer Button (z.B. für Hauptaktionen) */
+.btn-primary {
+    background-color: #3498db; /* Blauer Hintergrund */
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9; /* Dunkleres Blau beim Hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Sekundärer Button (z.B. für Nebenaktionen oder neutrale Zwecke) */
+.btn-secondary {
+    background-color: #7f8c8d; /* Grauer Hintergrund */
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #95a5a6; /* Helleres Grau beim Hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Success Button (z.B. für positive Aktionen) */
+.btn-success {
+    background-color: #2ecc71; /* Grüner Hintergrund */
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #27ae60; /* Dunkleres Grün beim Hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Danger Button (z.B. für Warnungen oder Löschaktionen) */
+.btn-danger {
+    background-color: #e74c3c; /* Roter Hintergrund */
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b; /* Dunkleres Rot beim Hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Outline Buttons (ohne Hintergrund, nur Rahmen) */
+.btn-outline-primary {
+    background-color: transparent;
+    color: #3498db;
+    border: 2px solid #3498db;
+}
+
+.btn-outline-primary:hover {
+    background-color: #3498db;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-outline-secondary {
+    background-color: transparent;
+    color: #7f8c8d;
+    border: 2px solid #7f8c8d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #7f8c8d;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Kleine Buttons */
+.btn-sm {
+    padding: 8px 15px;
+    font-size: 0.9em;
+}
+
+/* Große Buttons */
+.btn-lg {
+    padding: 15px 30px;
+    font-size: 1.2em;
+}
+
+/* Button als Block-Element (volle Breite) */
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* Deaktivierte Buttons */
+.btn:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}

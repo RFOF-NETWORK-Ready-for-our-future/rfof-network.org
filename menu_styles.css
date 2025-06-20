@@ -1,0 +1,150 @@
+/* menu_styles.css */
+
+/* Basis-Styling für das Navigationsmenü */
+.main-navigation {
+    background-color: #2c3e50; /* Dunkelblauer Hintergrund */
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    position: relative; /* Wichtig für absolute Positionierung des Dropdowns */
+    z-index: 1000; /* Stellt sicher, dass das Menü über anderen Elementen liegt */
+}
+
+.main-navigation .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.main-navigation .logo a {
+    color: #ecf0f1; /* Heller Text */
+    font-size: 1.8em;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.main-navigation .logo a:hover {
+    color: #3498db; /* Blauer Hover-Effekt */
+}
+
+.main-navigation .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-navigation .nav-list li {
+    position: relative; /* Für Dropdowns */
+    margin-left: 30px;
+}
+
+.main-navigation .nav-list li a {
+    color: #ecf0f1; /* Heller Text */
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 15px 0;
+    display: block;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.main-navigation .nav-list li a:hover,
+.main-navigation .nav-list li.active a {
+    color: #3498db; /* Blauer Hover/Active-Effekt */
+    /* background-color: rgba(0, 0, 0, 0.1); Optional: Hintergrund bei Hover */
+}
+
+/* Dropdown-Menü */
+.main-navigation .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #34495e; /* Dunklerer Hintergrund für Dropdown */
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 3px solid #3498db; /* Blauer Rand oben */
+}
+
+.main-navigation .nav-list li:hover > .dropdown-menu {
+    display: block;
+}
+
+.main-navigation .dropdown-menu li {
+    margin: 0;
+}
+
+.main-navigation .dropdown-menu li a {
+    color: #ecf0f1;
+    padding: 12px 15px;
+    display: block;
+    white-space: nowrap; /* Verhindert Zeilenumbruch bei langen Menüpunkten */
+}
+
+.main-navigation .dropdown-menu li a:hover {
+    background-color: #2c3e50; /* Hintergrund bei Hover im Dropdown */
+    color: #3498db;
+}
+
+/* Burger-Menü für mobile Ansicht */
+.menu-toggle {
+    display: none; /* Standardmäßig versteckt */
+    font-size: 2em;
+    color: #ecf0f1;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-navigation .nav-list {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #2c3e50;
+        position: absolute;
+        top: 100%; /* Unterhalb der Navigationsleiste */
+        left: 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .main-navigation .nav-list.active {
+        display: flex;
+    }
+
+    .main-navigation .nav-list li {
+        margin: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Trennlinien */
+    }
+
+    .main-navigation .nav-list li:last-child {
+        border-bottom: none;
+    }
+
+    .main-navigation .nav-list li a {
+        padding: 15px 20px;
+        text-align: center;
+    }
+
+    .main-navigation .dropdown-menu {
+        position: static; /* Dropdown wird im mobilen Modus statisch */
+        box-shadow: none;
+        border-top: none;
+        background-color: #3a536b; /* Hellerer Hintergrund für mobile Dropdowns */
+        width: 100%;
+    }
+
+    .main-navigation .dropdown-menu li a {
+        padding-left: 40px; /* Einzug für Sub-Menüpunkte */
+    }
+
+    .menu-toggle {
+        display: block; /* Zeigt das Burger-Menü-Symbol an */
+    }
+}
