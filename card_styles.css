@@ -1,0 +1,119 @@
+/* card_styles.css */
+
+/* Basis-Styling für Karten */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsives Gitter */
+    gap: 30px; /* Abstand zwischen den Karten */
+    padding: 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Stellt sicher, dass das Bild innerhalb des Radius bleibt */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Leichter Hoch-Effekt beim Hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px; /* Feste Höhe für Bilder */
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Bildausschnitt so, dass es den Bereich ausfüllt */
+    display: block;
+}
+
+.card-content {
+    padding: 20px;
+    flex-grow: 1; /* Lässt den Inhalt den verbleibenden Platz einnehmen */
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.5em;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.card-description {
+    font-size: 1em;
+    color: #34495e;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Lässt die Beschreibung den verbleibenden Platz einnehmen */
+}
+
+.card-link {
+    display: inline-block;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px; /* Abstand zum Inhalt darüber */
+    align-self: flex-start; /* Link am Anfang des Flex-Containers ausrichten */
+    transition: color 0.3s ease;
+}
+
+.card-link:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* Optionale Varianten für Karten */
+
+/* Karte mit Schatten */
+.card-shadow {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Karte ohne Bild */
+.card-no-image .card-image {
+    display: none;
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: 1fr; /* Eine Spalte auf kleineren Bildschirmen */
+        padding: 15px;
+        margin: 20px auto;
+    }
+
+    .card-image {
+        height: 180px;
+    }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    .card-title {
+        font-size: 1.3em;
+    }
+
+    .card-description {
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-image {
+        height: 150px;
+    }
+}
